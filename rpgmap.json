@@ -41,6 +41,7 @@
          "name":"Trunk",
          "objects":[
                 {
+                "gid":1,
                  "height":55,
                  "id":1,
                  "name":"",
