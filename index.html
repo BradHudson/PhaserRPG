@@ -9,16 +9,13 @@
 
     <script type="text/javascript">
 
-
-    // _width = window.innerWidth;
-    // _height = window.innerHeight;
-
     var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update });
     var player;
     var cursors;
     var direction = "down";
     var speed;
     var spaceKey;
+	var collisionlayer;
 
     function preload() {
         game.load.spritesheet('dude', 'newguy.png', 30, 32);
@@ -26,50 +23,45 @@
         game.load.tilemap('MyTilemap', 'rpgmap.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('grass', 'grass-tiles.png');
         game.load.image('tree', 'tree-tile.png');
+		game.load.image('red', 'RED.png');
     }
     function create() {
         spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         game.world.setBounds(0, 0, 1920, 1920);
 
+		//add tilemap and tilesetimages
         map = game.add.tilemap('MyTilemap');
         map.addTilesetImage('grass', 'grass');
         map.addTilesetImage('tree', 'tree');
-        map.addTilesetImage('tree', 'tree');
-
-        map.setCollisionBetween(1, 12);
-
-        trunk = game.add.group();
-        trunk.enableBody = true;
-        map.createFromObjects('Trunk', 1, 'tree', 0, true, false, trunk);
-
-        // if (map.objects.Trunk) {
-        // const trunk = map.objects.Trunk;
-        // trunk.forEach(bumper => {
-        //     // do something here with the data
-        //     console.log(bumper);
-        // });
-        // }
-
+        map.addTilesetImage('RED', 'red');
+		
+		//Use setcollision with ID of Collisions tileset?
+		map.setCollision(137, true, 'Collisions');
+		//add base layer
         layer = map.createLayer('Background');
-        layer = map.createLayer('Foreground');
-        layer = map.createLayer('Treetop');
-        layer.resizeWorld();
-        layer.wrap = true;
-
-        player = game.add.sprite(200, 200, 'dude');
+		//add collisions layer here?
+		collisionlayer = map.createLayer('Collisions');
+        //add player 
+		player = game.add.sprite(800, 400, 'dude');
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.body.collideWorldBounds = true;
+		player.bringToTop();
+		// add other layers
+		map.createLayer('Foreground');
+        map.createLayer('Treetop');
+		layer.resizeWorld();
+		layer.wrap = true;
 
+		//add enemy
         enemy = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
         game.physics.enable(enemy, Phaser.Physics.ARCADE);
         enemy.body.immovable = true;
         enemy.body.moves =false;
         enemy.body.collideWorldBounds = true;
-        //game.physics.p2.enable(player);
         player.anchor.setTo(0.5, 0.5);
         game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
 
-        //animations
+		//animations for player
         player.animations.add('down', [0, 1, 2], 10, true);
         player.animations.add('left', [3, 4, 5], 10, true);
         player.animations.add('right', [6, 7,8], 10, true);
@@ -79,12 +71,12 @@
 
     }
     function update() {
+	//This SHOULD tell player to collide with collisionlayer right?
+	game.physics.arcade.collide(player, collisionlayer);
+
+	//game.physics.arcade.collide(player, layer); //this works when colliding with layer 1
 	if(game.physics.arcade.collide(player, enemy)){
-		if (confirm('Are you sure you want to save this thing into the database?')) {
-    		// Save it!
-		} else {
-			// Do nothing!
-		}
+		//do something when player collides with enemy
 	}
 	player.body.velocity.x = 0
 	player.body.velocity.y = 0
@@ -157,8 +149,6 @@
 
 	}
     }
-
-new Game();
 
     </script>
 
