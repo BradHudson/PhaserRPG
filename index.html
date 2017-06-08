@@ -6,53 +6,7 @@
         <script src="//cdn.jsdelivr.net/phaser/2.5.0/phaser.min.js"></script>
     </head>
     <body>
-
-    <script type="text/javascript">
-
-    var Game = function() {
-
-    this._width = window.innerWidth;
-    this._height = window.innerHeight;
-
-    this.game = new Phaser.Game(this._width, this._height, Phaser.AUTO, '', {
-        preload: this.preload,
-        create: this.create,
-        update: this.update
-    });
-}
-
-Game.prototype = {
-    preload: function() {
-        this.game.load.tilemap('MyTilemap', 'rpgmap.json', null, Phaser.Tilemap.TILED_JSON);
-        this.game.load.image('grass', 'grass-tiles.png');
-        this.game.load.image('tree', 'tree-tile.png');
-    },
-    create: function() {
-          // Load the map.
-        map = this.game.add.tilemap('MyTilemap');
-        map.addTilesetImage('grass', 'grass');
-        map.addTilesetImage('tree', 'tree');
-
-        layer = map.createLayer('Background');
-        layer.resizeWorld();
-        layer = map.createLayer('Foreground');
-        layer.resizeWorld();
-        layer = map.createLayer('Treetop');
-        layer.resizeWorld();
-        layer.wrap = true;
-
-        this.cursors = this.game.input.keyboard.createCursorKeys();
-
-    },
-    update: function() {
-
-    }
-}
-
-new Game();
-
-    </script>
-
+    <script type="text/javascript" src="main.js"></script>
     </body>
 </html>
 
