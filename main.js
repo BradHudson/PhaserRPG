@@ -4,7 +4,9 @@
     var direction = "down";
     var speed;
     var spaceKey;
+    var actionKey
 	var collisionlayer;
+    var allowCollision = true;
 
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
@@ -17,51 +19,14 @@
     }
     function create() {
         spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        actionKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
         game.world.setBounds(0, 0, 1920, 1920);
-
-		//add tilemap and tilesetimages
-        map = game.add.tilemap('MyTilemap');
-        map.addTilesetImage('grass', 'grass');
-        map.addTilesetImage('tree', 'tree');
-        map.addTilesetImage('RED', 'red');
-        map.addTilesetImage('terrain-atlas', 'terrain-atlas');
-		
-		//Collision between player and collision layer
-        collisionlayer = map.createLayer('Collisions');
-		map.setCollision(137, true, 'Collisions');
-		//add base layer
-        layer = map.createLayer('Background');
-		//add collisions layer here?
-		
-        //add player 
-		player = game.add.sprite(800, 400, 'dude');
-        game.physics.enable(player, Phaser.Physics.ARCADE);
-        player.body.collideWorldBounds = true;
-		player.bringToTop();
-        player.position.x = map.objects.StartPosition[0].x
-        player.position.y = map.objects.StartPosition[0].y
-		// add other layers
-		map.createLayer('Foreground');
-        map.createLayer('Treetop');
-		layer.resizeWorld();
-		layer.wrap = true;  
-
-		//add enemy
-        enemy = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
-        game.physics.enable(enemy, Phaser.Physics.ARCADE);
-        enemy.body.immovable = true;
-        enemy.body.moves =false;
-        enemy.body.collideWorldBounds = true;
-        enemy.position.x = map.objects.NPC[0].x
-        enemy.position.y = map.objects.NPC[0].y
-        //player.anchor.setTo(0.5, 0.5);
+        addTileMap();
+		addLayersPlayerCollisions();
+        addNPC();
         game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
-
-		//animations for player
         addPlayerAnimations();
-
         cursors = game.input.keyboard.createCursorKeys();
-
     }
 
     function update() {
@@ -71,6 +36,7 @@
     }
 
     function addPlayerAnimations() {
+        //animations for player
         player.animations.add('down', [0, 1, 2], 10, true);
         player.animations.add('left', [3, 4, 5], 10, true);
         player.animations.add('right', [6, 7,8], 10, true);
@@ -80,11 +46,17 @@
     function handleCollisions(){
         //Collision between player and collision layer
         game.physics.arcade.collide(player, collisionlayer);
-
-        //game.physics.arcade.collide(player, layer); //this works when colliding with layer 1
-        if(game.physics.arcade.collide(player, enemy)){
-            //do something when player collides with enemy
+        game.physics.arcade.collide(player, npc)
+        
+        if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKey.isDown && allowCollision === true){
+            allowCollision = false;
+            setTimeout(preventDoubleCollision, 500)
+            document.getElementById('player-level').innerHTML=parseInt(document.getElementById('player-level').innerHTML)+1;
         }
+    }
+
+    function preventDoubleCollision(){
+        allowCollision = true;
     }
 
     function resetPlayerVelocity(){
@@ -102,7 +74,6 @@
 			speed = -300;
 		}
 		player.body.velocity.x = speed
-	//	player.body.moveLeft(speed);
 		player.animations.play('left');
 		direction = "left";
 	}
@@ -115,7 +86,6 @@
 			speed = 300;
 		}
 		player.body.velocity.x = speed
-		//player.body.moveRight(speed);
 		player.animations.play('right');
 		direction = "right";
 	}
@@ -159,4 +129,45 @@
 
 
 	}
+    }
+
+    function addTileMap(){
+        //add tilemap and tilesetimages
+        map = game.add.tilemap('MyTilemap');
+        map.addTilesetImage('grass', 'grass');
+        map.addTilesetImage('tree', 'tree');
+        map.addTilesetImage('RED', 'red');
+        map.addTilesetImage('terrain-atlas', 'terrain-atlas');
+    }
+
+    function addLayersPlayerCollisions(){
+        //Collision between player and collision layer
+        collisionlayer = map.createLayer('Collisions');
+		map.setCollision(137, true, 'Collisions');
+		//add base layer
+        layer = map.createLayer('Background');
+		
+        //add player 
+		player = game.add.sprite(800, 400, 'dude');
+        game.physics.enable(player, Phaser.Physics.ARCADE);
+        player.body.collideWorldBounds = true;
+		player.bringToTop();
+        player.position.x = map.objects.StartPosition[0].x
+        player.position.y = map.objects.StartPosition[0].y
+		// add other layers
+		map.createLayer('Foreground');
+        map.createLayer('Treetop');
+		layer.resizeWorld();
+		layer.wrap = true;  
+    }
+
+    function addNPC(){
+        //add enemy
+        npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
+        game.physics.enable(npc, Phaser.Physics.ARCADE);
+        npc.body.immovable = true;
+        npc.body.moves =false;
+        npc.body.collideWorldBounds = true;
+        npc.position.x = map.objects.NPC[0].x
+        npc.position.y = map.objects.NPC[0].y
     }
