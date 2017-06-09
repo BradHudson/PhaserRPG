@@ -10,10 +10,14 @@
     var dialogArray;
     var indexOfDialog = 0;
     var inConversation = false;
+    var inQuest = false;
+    var invisWall;
+    var npc;
 
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
 	    game.load.spritesheet('adam', 'assets/adam.png', 30, 32);
+        game.load.spritesheet('gus', 'assets/gus.png', 30, 32);
         game.load.tilemap('MyTilemap', 'rpgmap.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('grass', 'assets/grass-tiles.png');
         game.load.image('tree', 'assets/tree-tile.png');
@@ -49,13 +53,23 @@
     function handleCollisions(){
         //Collision between player and collision layer
         game.physics.arcade.collide(player, collisionlayer);
-        game.physics.arcade.collide(player, npc)
-        
-        if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKey.isDown && allowCollision === true){
+        handleNPCCollision();
+        handleBigTreeCollision();
+    }
+
+    function handleBigTreeCollision() {
+
+    }
+
+    function handleNPCCollision() {
+        //game.physics.arcade.collide(player, invisWall);
+        game.physics.arcade.collide(player, npc);
+        if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKey.isDown && allowCollision === true && inQuest === false){
             allowCollision = false;
-            setTimeout(preventDoubleCollision, 10000)
+            setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
-            dialogArray = ["Welcome to the world", "go click A on the tree", "Come back when you have it completed"];
+            dialogArray = ["Welcome to the world", "go click A on the tree", "Retrieve what you find and come back"];
+            inQuest = true;
             startConversation(dialogArray);
             }
         }
@@ -65,6 +79,10 @@
         inConversation = true;
         indexOfDialog = 0;
         displayNextDialog(indexOfDialog);
+    }
+
+    function blankDialog() {
+        document.getElementById('dialog').innerHTML='';
     }
 
     function displayNextDialog(){
@@ -163,13 +181,21 @@
 		//add base layer
         layer = map.createLayer('Background');
 		
-        //add player 
+        //add inviswall 
+        invisWall = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50);
+        invisWall.scale.setTo(7, 7);
+        invisWall.position.x = map.objects.BigTree[0].x + 20;
+        invisWall.position.y = map.objects.BigTree[0].y - 20;
+        game.physics.enable(invisWall, Phaser.Physics.ARCADE);
+        invisWall.body.immovable = true;
+        invisWall.body.collideWorldBounds = true;
+
 		player = game.add.sprite(800, 400, 'dude');
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.body.collideWorldBounds = true;
 		player.bringToTop();
-        player.position.x = map.objects.StartPosition[0].x
-        player.position.y = map.objects.StartPosition[0].y
+        player.position.x = map.objects.StartPosition[0].x;
+        player.position.y = map.objects.StartPosition[0].y;
 		// add other layers
 		map.createLayer('Foreground');
         map.createLayer('Treetop');
