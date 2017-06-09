@@ -1,0 +1,18 @@
+.property h2{
+    /*font-size: 3em;*/
+    display: inline-block;
+}
+.property span{
+    font-size: 1.5em;
+}
+
+.score-card .property{
+    /*font-size: 3em;*/
+    display: inline-block;
+    margin-right: 32px;
+    margin-left: 16px;
+}
+
+#inventory{
+    font-size: 1.5em;
+}
