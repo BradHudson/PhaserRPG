@@ -13,6 +13,7 @@
         game.load.image('grass', 'assets/grass-tiles.png');
         game.load.image('tree', 'assets/tree-tile.png');
 		game.load.image('red', 'assets/RED.png');
+        game.load.image('terrain-atlas', 'assets/terrain_atlas.png')
     }
     function create() {
         spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -23,13 +24,15 @@
         map.addTilesetImage('grass', 'grass');
         map.addTilesetImage('tree', 'tree');
         map.addTilesetImage('RED', 'red');
+        map.addTilesetImage('terrain-atlas', 'terrain-atlas');
 		
 		//Collision between player and collision layer
+        collisionlayer = map.createLayer('Collisions');
 		map.setCollision(137, true, 'Collisions');
 		//add base layer
         layer = map.createLayer('Background');
 		//add collisions layer here?
-		collisionlayer = map.createLayer('Collisions');
+		
         //add player 
 		player = game.add.sprite(800, 400, 'dude');
         game.physics.enable(player, Phaser.Physics.ARCADE);
@@ -39,7 +42,7 @@
 		map.createLayer('Foreground');
         map.createLayer('Treetop');
 		layer.resizeWorld();
-		layer.wrap = true;
+		layer.wrap = true;  
 
 		//add enemy
         enemy = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
