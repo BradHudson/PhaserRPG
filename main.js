@@ -38,6 +38,8 @@
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.body.collideWorldBounds = true;
 		player.bringToTop();
+        player.position.x = map.objects.StartPosition[0].x
+        player.position.y = map.objects.StartPosition[0].y
 		// add other layers
 		map.createLayer('Foreground');
         map.createLayer('Treetop');
@@ -50,7 +52,9 @@
         enemy.body.immovable = true;
         enemy.body.moves =false;
         enemy.body.collideWorldBounds = true;
-        player.anchor.setTo(0.5, 0.5);
+        enemy.position.x = map.objects.NPC[0].x
+        enemy.position.y = map.objects.NPC[0].y
+        //player.anchor.setTo(0.5, 0.5);
         game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
 
 		//animations for player
