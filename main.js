@@ -7,6 +7,9 @@
     var actionKey
 	var collisionlayer;
     var allowCollision = true;
+    var dialogArray;
+    var indexOfDialog = 0;
+    var inConversation = false;
 
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
@@ -50,9 +53,22 @@
         
         if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKey.isDown && allowCollision === true){
             allowCollision = false;
-            setTimeout(preventDoubleCollision, 500)
-            document.getElementById('player-level').innerHTML=parseInt(document.getElementById('player-level').innerHTML)+1;
+            setTimeout(preventDoubleCollision, 10000)
+            if(inConversation === false){
+            dialogArray = ["Welcome to the world", "go click A on the tree", "Come back when you have it completed"];
+            startConversation(dialogArray);
+            }
         }
+    }
+
+    function startConversation(dialogArray) {
+        inConversation = true;
+        indexOfDialog = 0;
+        displayNextDialog(indexOfDialog);
+    }
+
+    function displayNextDialog(){
+        document.getElementById('dialog').innerHTML=dialogArray[indexOfDialog];
     }
 
     function preventDoubleCollision(){
@@ -171,3 +187,15 @@
         npc.position.x = map.objects.NPC[0].x
         npc.position.y = map.objects.NPC[0].y
     }
+
+    document.body.onkeyup = function(e){
+        if(e.keyCode == 32 && inConversation){
+            displayNextDialog();
+            if(indexOfDialog === dialogArray.length){
+                document.getElementById('dialog').innerHTML='';
+                inConversation = false;
+            }
+            indexOfDialog = indexOfDialog + 1;
+        }
+    }
+
