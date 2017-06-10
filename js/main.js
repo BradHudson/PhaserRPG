@@ -15,7 +15,7 @@
     var npc;
     var textOnScreen;
     var conversationJSON = loadJSONConversations();
-    var inventoryItems = {};
+    var weaponList = [];
 
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
@@ -57,6 +57,8 @@
             setTimeout(preventDoubleCollision(), 500)
             dialogArray = conversationJSON.Level1["BigTree"];
             startConversation(dialogArray);
+            addWeaponToInventory('Limb');
+            addWeaponToInventory('Limb2');
         }
     }
 

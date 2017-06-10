@@ -1,0 +1,9 @@
+{ "Limb":{
+    "Attack": 1,
+    "Defense": 1,
+    "Moves": {
+        "Strike": 90,
+        "Powerful Strike": 25
+    }
+}
+}

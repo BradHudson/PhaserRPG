@@ -28,7 +28,7 @@ document.body.onkeyup = function(e){
 
  function loadJSONConversations(){
    var request = new XMLHttpRequest();
-   request.open("GET", "conversations.json", false);
+   request.open("GET", "gameData/conversations.json", false);
    request.send(null);
    return JSON.parse(request.responseText);
  } 

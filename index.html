@@ -14,19 +14,13 @@
 			<div class="property"><h2>Level: </h2><span id="player-level" class="amount">0</span></div>
 			<div class="property"><h2>Health: </h2><span id="player-health" class="amount"> 0</span></div>
 			<div class="property"><h2>Attack: </h2><span id="player-attack" class="amount"> 0</span></div>
-			<div class="property"><h2>Weapon Equipped: </h2><span id="weapon" class="amount">N/A</span></div>
+			<div class="property"><h2>Weapon Equipped: </h2><span id="weapon-equipped" class="amount">N/A</span></div>
 			<div class="property"><h2>Armor Equipped: </h2><span id="armor" class="amount">N/A</span></div>
 			<button onclick="showInventory()" id="inventory">Inventory</button>
 		</div>
 		<div id="inventory-menu">
 			<label>Weapons</label>
-			<ul>
-				<li><input id="Checkbox1" name="Checkbox1" type="checkbox" value="Admin" />
-					<label for="Checkbox1">Sword</label>
-				</li>
-				<li><input id="Checkbox2" name="Checkbox2" type="checkbox" value="Admin" />
-					<label for="Checkbox2">Spear</label>
-				</li>
+			<ul id="weapon-list">
 			</ul>
 		</div>
 		<div id="gameContainer"></div>
