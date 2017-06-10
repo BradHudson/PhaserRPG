@@ -1,0 +1,12 @@
+{ "columns":8,
+ "image":"..\/Localhost\/Games\/hellophaser\/assets\/tree-tile.png",
+ "imageheight":256,
+ "imagewidth":256,
+ "margin":0,
+ "name":"tree",
+ "spacing":0,
+ "tilecount":64,
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset"
+}
