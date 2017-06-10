@@ -16,6 +16,10 @@
     var textOnScreen;
     var conversationJSON = loadJSONConversations();
     var weaponList = [];
+    var stageOfNPCConversation = 0;
+    var stageOfTreeConversation = 0;
+    var whoWeTalkingTo = '';
+    var playerStats;
 
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
@@ -53,24 +57,29 @@
 
     function handleBigTreeCollision() {
         if(Phaser.Rectangle.intersects(player.getBounds(), bigTreeSprite.getBounds()) && actionKeyAndAllowCollision() && inQuest === true){
+            whoWeTalkingTo = "BigTree";
             allowCollision = false;
             setTimeout(preventDoubleCollision(), 500)
             dialogArray = conversationJSON.Level1["BigTree"];
             startConversation(dialogArray);
             addWeaponToInventory('Limb');
-            addWeaponToInventory('Limb2');
+            inQuest = false;
         }
     }
 
     function handleNPCCollision() {
         game.physics.arcade.collide(player, npc);
         if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
+            whoWeTalkingTo = "NPC";
             allowCollision = false;
             setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
-                dialogArray = conversationJSON.Level1["Intro-Chat"];
+                dialogArray = conversationJSON.Level1["NPC"][stageOfNPCConversation];
                 inQuest = true;
                 startConversation(dialogArray);
+                if(stageOfNPCConversation === 1){
+                    fight(1,"NPC");
+                }
             }
         }
     }

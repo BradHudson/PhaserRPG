@@ -1,8 +1,13 @@
 { "Level1":{
-    "Intro-Chat":[
+    "NPC":[
+        [
     "Welcome to the world", 
     "go click A on the tree", 
     "Retrieve what you find and come back"
+    ],
+    [
+        "Been waiting all day for this."
+    ]
     ],
     "BigTree":[
         "*You pull a limb from the tree*",
