@@ -13,6 +13,8 @@
     var inQuest = false;
     var invisWall;
     var npc;
+    var textOnScreen;
+    var conversationJSON = loadJSONConversations();
 
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
@@ -34,6 +36,9 @@
         game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
         addPlayerAnimations();
         cursors = game.input.keyboard.createCursorKeys();
+        textOnScreen = game.add.text(200, 500, "", { font: "32px Arial", fill: "#ffffff", align: "center" });
+        textOnScreen.fixedToCamera = true;
+        textOnScreen.cameraOffset.setTo(200, 500);
     }
 
     function update() {
@@ -68,25 +73,11 @@
             allowCollision = false;
             setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
-            dialogArray = ["Welcome to the world", "go click A on the tree", "Retrieve what you find and come back"];
+            dialogArray = conversationJSON.Level1["Intro-Chat"];
             inQuest = true;
             startConversation(dialogArray);
             }
         }
-    }
-
-    function startConversation(dialogArray) {
-        inConversation = true;
-        indexOfDialog = 0;
-        displayNextDialog(indexOfDialog);
-    }
-
-    function blankDialog() {
-        document.getElementById('dialog').innerHTML='';
-    }
-
-    function displayNextDialog(){
-        document.getElementById('dialog').innerHTML=dialogArray[indexOfDialog];
     }
 
     function preventDoubleCollision(){
@@ -99,8 +90,7 @@
     }
 
     function setKeys(){
-        if (cursors.left.isDown)
-	{
+    if (cursors.left.isDown){
 		if(spaceKey.isDown)
 		{
 			speed = -500;
@@ -110,9 +100,7 @@
 		player.body.velocity.x = speed
 		player.animations.play('left');
 		direction = "left";
-	}
-	else if (cursors.right.isDown)
-	{
+	} else if (cursors.right.isDown){
 		if(spaceKey.isDown)
 		{
 			speed = 500;
@@ -122,9 +110,7 @@
 		player.body.velocity.x = speed
 		player.animations.play('right');
 		direction = "right";
-	}
-	else if (cursors.up.isDown)
-	{
+	} else if (cursors.up.isDown) {
 		if(spaceKey.isDown)
 		{
 			speed = -500;
@@ -135,9 +121,7 @@
 		//player.body.moveUp(speed);
 		player.animations.play('up');
 		direction = "up";
-	}
-	else if (cursors.down.isDown)
-	{
+	} else if (cursors.down.isDown) {
 		if(spaceKey.isDown)
 		{
 			speed = 500;
@@ -148,8 +132,7 @@
 		//player.body.moveDown(speed);
 		player.animations.play('down');
 		direction = "down";
-	}
-	else {
+	} else {
 		player.animations.stop(null, true);
 		if(direction === "left"){
 			player.frame = 4;
@@ -160,9 +143,7 @@
 		}else{
 			player.frame = 1;
 		}
-
-
-	}
+	    }
     }
 
     function addTileMap(){
@@ -213,15 +194,3 @@
         npc.position.x = map.objects.NPC[0].x
         npc.position.y = map.objects.NPC[0].y
     }
-
-    document.body.onkeyup = function(e){
-        if(e.keyCode == 32 && inConversation){
-            displayNextDialog();
-            if(indexOfDialog === dialogArray.length){
-                document.getElementById('dialog').innerHTML='';
-                inConversation = false;
-            }
-            indexOfDialog = indexOfDialog + 1;
-        }
-    }
-
