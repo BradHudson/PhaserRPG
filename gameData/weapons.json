@@ -1,4 +1,5 @@
 { "Limb":{
+    "ImageSource": "assets/weaponicons/limb.png",
     "Attack": 1,
     "Defense": 1,
     "Moves": {

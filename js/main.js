@@ -19,7 +19,7 @@
     var stageOfNPCConversation = 0;
     var stageOfTreeConversation = 0;
     var whoWeTalkingTo = '';
-    var playerStats;
+    var inBattle = false;
 
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
