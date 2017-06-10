@@ -16,3 +16,20 @@
 #inventory{
     font-size: 1.5em;
 }
+
+#inventory-menu{
+    /*background-color: black;*/
+    display: none;
+}
+#inventory-menu li{
+    /*color: white;*/
+}
+
+#inventory-menu label {
+  /*float: left;*/
+}
+#inventory-menu ul {
+  /*margin: 0;*/
+  list-style: none;
+  /*float: left;*/
+}

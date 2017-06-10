@@ -3,6 +3,10 @@
     "Welcome to the world", 
     "go click A on the tree", 
     "Retrieve what you find and come back"
+    ],
+    "BigTree":[
+        "*You pull a limb from the tree*",
+        "Click Inventory at the top and Equip the Limb"
     ]
 }
 }

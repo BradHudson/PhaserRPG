@@ -18,9 +18,11 @@ document.body.onkeyup = function(e){
         if(indexOfDialog === dialogArray.length){
             textOnScreen.text = "";
             inConversation = false;
-        }
+            indexOfDialog = 0;
+        }else{
         displayNextDialog();
         indexOfDialog = indexOfDialog + 1;
+        }
     }
 }
 
@@ -32,7 +34,7 @@ document.body.onkeyup = function(e){
  } 
 
  function addTextOnScreen(){
-    textOnScreen = game.add.text(200, 500, "", { font: "32px Arial", fill: "#ffffff", align: "center" });
+    textOnScreen = game.add.text(200, 500, "", { font: "24px Arial", fill: "#ffffff", align: "center" });
     textOnScreen.fixedToCamera = true;
     textOnScreen.cameraOffset.setTo(200, 500);
  }

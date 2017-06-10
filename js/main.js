@@ -11,10 +11,11 @@
     var indexOfDialog = 0;
     var inConversation = false;
     var inQuest = false;
-    var invisWall;
+    var bigTreeSprite;
     var npc;
     var textOnScreen;
     var conversationJSON = loadJSONConversations();
+    var inventoryItems = {};
 
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
@@ -51,25 +52,33 @@
     }
 
     function handleBigTreeCollision() {
-
+        if(Phaser.Rectangle.intersects(player.getBounds(), bigTreeSprite.getBounds()) && actionKeyAndAllowCollision() && inQuest === true){
+            allowCollision = false;
+            setTimeout(preventDoubleCollision(), 500)
+            dialogArray = conversationJSON.Level1["BigTree"];
+            startConversation(dialogArray);
+        }
     }
 
     function handleNPCCollision() {
-        //game.physics.arcade.collide(player, invisWall);
         game.physics.arcade.collide(player, npc);
-        if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKey.isDown && allowCollision === true && inQuest === false){
+        if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
             allowCollision = false;
             setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
-            dialogArray = conversationJSON.Level1["Intro-Chat"];
-            inQuest = true;
-            startConversation(dialogArray);
+                dialogArray = conversationJSON.Level1["Intro-Chat"];
+                inQuest = true;
+                startConversation(dialogArray);
             }
         }
     }
 
     function preventDoubleCollision(){
         allowCollision = true;
+    }
+
+    function actionKeyAndAllowCollision(){
+        return (actionKey.isDown && allowCollision === true)
     }
 
     function addTileMap(){
@@ -90,13 +99,13 @@
         layer = map.createLayer('Background');
 		
         //INVISIBLE WALL 
-        invisWall = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50);
-        invisWall.scale.setTo(7, 7);
-        invisWall.position.x = map.objects.BigTree[0].x + 20;
-        invisWall.position.y = map.objects.BigTree[0].y - 20;
-        game.physics.enable(invisWall, Phaser.Physics.ARCADE);
-        invisWall.body.immovable = true;
-        invisWall.body.collideWorldBounds = true;
+        bigTreeSprite = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50);
+        bigTreeSprite.scale.setTo(7, 7);
+        bigTreeSprite.position.x = map.objects.BigTree[0].x + 20;
+        bigTreeSprite.position.y = map.objects.BigTree[0].y - 20;
+        game.physics.enable(bigTreeSprite, Phaser.Physics.ARCADE);
+        bigTreeSprite.body.immovable = true;
+        bigTreeSprite.body.collideWorldBounds = true;
 
         //LOAD THE PLAYER
 		player = game.add.sprite(800, 400, 'dude');
