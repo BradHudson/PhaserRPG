@@ -14,15 +14,15 @@ function displayNextDialog(){
 }
 
 document.body.onkeyup = function(e){
-        if(e.keyCode == 32 && inConversation){
-            if(indexOfDialog === dialogArray.length){
-                textOnScreen.text = "";
-                inConversation = false;
-            }
-            displayNextDialog();
-            indexOfDialog = indexOfDialog + 1;
+    if(e.keyCode == 32 && inConversation){
+        if(indexOfDialog === dialogArray.length){
+            textOnScreen.text = "";
+            inConversation = false;
         }
+        displayNextDialog();
+        indexOfDialog = indexOfDialog + 1;
     }
+}
 
  function loadJSONConversations(){
    var request = new XMLHttpRequest();
@@ -30,3 +30,9 @@ document.body.onkeyup = function(e){
    request.send(null);
    return JSON.parse(request.responseText);
  } 
+
+ function addTextOnScreen(){
+    textOnScreen = game.add.text(200, 500, "", { font: "32px Arial", fill: "#ffffff", align: "center" });
+    textOnScreen.fixedToCamera = true;
+    textOnScreen.cameraOffset.setTo(200, 500);
+ }

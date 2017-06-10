@@ -33,26 +33,14 @@
         addTileMap();
 		addLayersPlayerCollisions();
         addNPC();
-        game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
         addPlayerAnimations();
-        cursors = game.input.keyboard.createCursorKeys();
-        textOnScreen = game.add.text(200, 500, "", { font: "32px Arial", fill: "#ffffff", align: "center" });
-        textOnScreen.fixedToCamera = true;
-        textOnScreen.cameraOffset.setTo(200, 500);
+        addTextOnScreen();
     }
 
     function update() {
     handleCollisions();
     resetPlayerVelocity();
 	setKeys();
-    }
-
-    function addPlayerAnimations() {
-        //animations for player
-        player.animations.add('down', [0, 1, 2], 10, true);
-        player.animations.add('left', [3, 4, 5], 10, true);
-        player.animations.add('right', [6, 7,8], 10, true);
-        player.animations.add('up', [9, 10, 11], 10, true);
     }
 
     function handleCollisions(){
@@ -84,68 +72,6 @@
         allowCollision = true;
     }
 
-    function resetPlayerVelocity(){
-        player.body.velocity.x = 0
-        player.body.velocity.y = 0
-    }
-
-    function setKeys(){
-    if (cursors.left.isDown){
-		if(spaceKey.isDown)
-		{
-			speed = -500;
-		}else{
-			speed = -300;
-		}
-		player.body.velocity.x = speed
-		player.animations.play('left');
-		direction = "left";
-	} else if (cursors.right.isDown){
-		if(spaceKey.isDown)
-		{
-			speed = 500;
-		}else{
-			speed = 300;
-		}
-		player.body.velocity.x = speed
-		player.animations.play('right');
-		direction = "right";
-	} else if (cursors.up.isDown) {
-		if(spaceKey.isDown)
-		{
-			speed = -500;
-		}else{
-			speed = -300;
-		}
-		player.body.velocity.y = speed
-		//player.body.moveUp(speed);
-		player.animations.play('up');
-		direction = "up";
-	} else if (cursors.down.isDown) {
-		if(spaceKey.isDown)
-		{
-			speed = 500;
-		}else{
-			speed = 300;
-		}
-		player.body.velocity.y = speed
-		//player.body.moveDown(speed);
-		player.animations.play('down');
-		direction = "down";
-	} else {
-		player.animations.stop(null, true);
-		if(direction === "left"){
-			player.frame = 4;
-		}else if(direction === "right"){
-			player.frame = 7;
-		}else if(direction === "up"){
-			player.frame = 10;
-		}else{
-			player.frame = 1;
-		}
-	    }
-    }
-
     function addTileMap(){
         //add tilemap and tilesetimages
         map = game.add.tilemap('MyTilemap');
@@ -156,13 +82,14 @@
     }
 
     function addLayersPlayerCollisions(){
-        //Collision between player and collision layer
+        //COLLISIONS LAYER MOST IMPORTANT
         collisionlayer = map.createLayer('Collisions');
 		map.setCollision(137, true, 'Collisions');
-		//add base layer
+
+		//BASE LAYER
         layer = map.createLayer('Background');
 		
-        //add inviswall 
+        //INVISIBLE WALL 
         invisWall = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50);
         invisWall.scale.setTo(7, 7);
         invisWall.position.x = map.objects.BigTree[0].x + 20;
@@ -171,12 +98,14 @@
         invisWall.body.immovable = true;
         invisWall.body.collideWorldBounds = true;
 
+        //LOAD THE PLAYER
 		player = game.add.sprite(800, 400, 'dude');
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.body.collideWorldBounds = true;
 		player.bringToTop();
         player.position.x = map.objects.StartPosition[0].x;
         player.position.y = map.objects.StartPosition[0].y;
+
 		// add other layers
 		map.createLayer('Foreground');
         map.createLayer('Treetop');
@@ -185,7 +114,7 @@
     }
 
     function addNPC(){
-        //add enemy
+        //add enemy/NPC's
         npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
         game.physics.enable(npc, Phaser.Physics.ARCADE);
         npc.body.immovable = true;
