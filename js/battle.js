@@ -1,11 +1,10 @@
-var currentEnemy;
+var currentEnemy = "NPC1";
 var weaponsProfile = loadWeaponStats();
 var enemiesProfile = loadEnemyStats();
 var inBattle = false;
 
-function fight(stage, enemy){
-    currentEnemy = enemies.Stages[stage];
-
+function fight(){
+    inBattle = true;
     //Open Fight Window
     //Show stats, weapon, moves
     // List of player moves

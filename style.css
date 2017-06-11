@@ -23,6 +23,10 @@
     font-size: 1.5em;
 }
 
+.score-card{
+    text-align: center;
+}
+
 .score-card .property{
     /*font-size: 3em;*/
     display: inline-block;
@@ -60,6 +64,10 @@
 .image-container{
     float:right;
     padding-top: 10px;
+}
+
+#weapon-image{
+    display: none;
 }
 
 #weapon-equipped-property{

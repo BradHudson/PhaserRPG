@@ -9,8 +9,8 @@
     var allowCollision = true;
     var bigTreeSprite;
     var npc;
+    var currentStage = "Stage1";
     
-
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
 	    game.load.spritesheet('adam', 'assets/adam.png', 30, 32);
@@ -60,7 +60,7 @@
     function handleNPCCollision() {
         game.physics.arcade.collide(player, npc);
         if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
-            whoWeTalkingTo = "NPC";
+            whoWeTalkingTo = "NPC1";
             allowCollision = false;
             setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
@@ -68,7 +68,7 @@
                 inQuest = true;
                 startConversation(dialogArray);
                 if(stageOfNPCConversation === 1){
-                    fight(1,"NPC");
+                    fight(currentStage,whoWeTalkingTo);
                 }
             }
         }

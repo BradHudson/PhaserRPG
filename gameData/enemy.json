@@ -1,9 +1,9 @@
-{ "Stages": [ {
-    "NPC": {
+{ "Stage1": {
+    "NPC1": {
         "Weapon": "Limb",
         "Health": 10,
         "SkillLevel": 1,
         "HaveFought": false
     }
-}]
+}
 }

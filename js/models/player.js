@@ -1,6 +1,5 @@
 var playerProfile = new Player();
 var inQuest = false;
-var weaponList = [];
 
 function Player(){
     playerJSON = loadPlayerStats();
@@ -9,6 +8,8 @@ function Player(){
     this.playerCheckPoint = playerJSON.Checkpoint;
     this.playerWeapons = playerJSON.Weapons;
     this.playerInventory = playerJSON.Inventory;
+    this.equippedWeapon = playerJSON.EquippedWeapon;
+    this.equippedItem = playerJSON.EquippedItem;
 }
 
 function savePlayer(){

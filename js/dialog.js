@@ -52,7 +52,7 @@ document.body.onkeyup = function(e){
 
  function updateStageOfConversation(whoWeTalkingTo){
      switch(whoWeTalkingTo){
-         case "NPC":
+         case "NPC1":
             stageOfNPCConversation = stageOfNPCConversation + 1;
             break;
          case "BigTree":

@@ -9,34 +9,33 @@
     </head>
     <body>
 		<div id="main-game">
-		
-		<div class="score-card">
-			<div class="property"><h2>Level: </h2><span id="player-level" class="amount">0</span></div>
-			<div class="property"><h2>Health: </h2><span id="player-health" class="amount"> 0</span></div>
-			<div class="property"><h2>Attack: </h2><span id="player-attack" class="amount"> 0</span></div>
-			<div class="property" id="weapon-equipped-property"><h2>Weapon Equipped: </h2><div class="image-container"><img src="assets/weaponicons/limb.png" height=44 width=44></img></div><span id="weapon-equipped" class="amount">N/A</span></div>
-			<div class="property"><h2>Armor Equipped: </h2><span id="armor" class="amount">N/A</span></div>
-			<button onclick="showInventory()" id="inventory">Inventory</button>
-		</div>
-		<div id="inventory-menu">
-			<label>Weapons</label>
-			<ul id="weapon-list">
-			</ul>
-		</div>
-		<div id="fight-Window">
-		</div>
-		<div id="gameContainer"></div>
-		<script type="text/javascript" src="js/models/player.js"></script>
-		<script type="text/javascript" src="js/battle.js"></script>
-		<script type="text/javascript" src="js/inventory.js"></script>
-		<script type="text/javascript" src="js/mechanics.js"></script>
-		<script type="text/javascript" src="js/dialog.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
-		
+			<div class="score-card">
+				<div class="property"><h2>Level: </h2><span id="player-level" class="amount">0</span></div>
+				<div class="property"><h2>Health: </h2><span id="player-health" class="amount"> 0</span></div>
+				<div class="property"><h2>Attack: </h2><span id="player-attack" class="amount"> 0</span></div>
+				<div class="property" id="weapon-equipped-property"><h2>Weapon Equipped: </h2><div class="image-container"><img id="weapon-image" src="" height=44 width=44></img></div><span id="weapon-equipped" class="amount">N/A</span></div>
+				<div class="property"><h2>Armor Equipped: </h2><span id="armor" class="amount">N/A</span></div>
+				<button onclick="showInventory()" id="inventory">Inventory</button>
+			</div>
+			<div id="inventory-menu">
+				<label>Weapons</label>
+				<ul id="weapon-list">
+				</ul>
+			</div>
+			<div id="fight-Window">
+			</div>
+			<div id="gameContainer"></div>
+			<script type="text/javascript" src="js/models/player.js"></script>
+			<script type="text/javascript" src="js/battle.js"></script>
+			<script type="text/javascript" src="js/inventory.js"></script>
+			<script type="text/javascript" src="js/mechanics.js"></script>
+			<script type="text/javascript" src="js/dialog.js"></script>
+			<script type="text/javascript" src="js/main.js"></script>
+			
 
-		<div id="footer">
-			----- A Mediocre RPG created by Brad Hudson -----
-		</div>
+			<div id="footer">
+				----- A Mediocre RPG created by Brad Hudson -----
+			</div>
 
 		</div>
     </body>

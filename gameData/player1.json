@@ -2,5 +2,7 @@
   "Health": 100,
   "Checkpoint": 1,
   "Weapons": [],
-  "Inventory": []
+  "Inventory": [],
+  "EquippedWeapon": "",
+  "EquippedItem": ""
 }
