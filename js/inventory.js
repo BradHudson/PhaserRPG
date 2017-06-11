@@ -42,3 +42,7 @@ function selectOnlyThis() {
 function updateWeaponEquipped(item){
     document.getElementById('weapon-equipped').innerHTML = item.name;
 }
+
+function weaponEquipped(){
+    return document.getElementById('weapon-equipped').innerHTML;
+}

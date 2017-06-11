@@ -1,3 +1,12 @@
+var conversationJSON = loadJSONConversations();
+var dialogArray;
+var indexOfDialog = 0;
+var inConversation = false;
+var textOnScreen;
+var whoWeTalkingTo = '';
+var stageOfNPCConversation = 0;
+var stageOfTreeConversation = 0;
+
 function startConversation(dialogArray) {
         inConversation = true;
         indexOfDialog = 0;

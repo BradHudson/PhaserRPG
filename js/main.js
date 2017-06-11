@@ -7,19 +7,9 @@
     var actionKey
 	var collisionlayer;
     var allowCollision = true;
-    var dialogArray;
-    var indexOfDialog = 0;
-    var inConversation = false;
-    var inQuest = false;
     var bigTreeSprite;
     var npc;
-    var textOnScreen;
-    var conversationJSON = loadJSONConversations();
-    var weaponList = [];
-    var stageOfNPCConversation = 0;
-    var stageOfTreeConversation = 0;
-    var whoWeTalkingTo = '';
-    var inBattle = false;
+    
 
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);

@@ -1,7 +1,7 @@
 var currentEnemy;
-var weapons = loadWeaponStats();
-var enemies = loadEnemyStats();
-var playerStats = loadPlayerStats();
+var weaponsProfile = loadWeaponStats();
+var enemiesProfile = loadEnemyStats();
+var inBattle = false;
 
 function fight(stage, enemy){
     currentEnemy = enemies.Stages[stage];
@@ -35,10 +35,3 @@ function loadWeaponStats(){
    request.send(null);
    return JSON.parse(request.responseText);
  } 
-
- function loadPlayerStats(){
-    var request = new XMLHttpRequest();
-   request.open("GET", "gameData/player1.json", false);
-   request.send(null);
-   return JSON.parse(request.responseText);
- }

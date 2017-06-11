@@ -1,3 +1,20 @@
+@font-face {
+    font-family: medieval;
+    src: url(dukeplus.regular.woff);
+}
+
+#main-game{
+    background-color: #F0E4AA;
+}
+
+#gameContainer{
+    margin-left: 200px;
+}
+
+* {
+ font-family: medieval;
+}
+
 .property h2{
     /*font-size: 3em;*/
     display: inline-block;
@@ -32,4 +49,19 @@
   /*margin: 0;*/
   list-style: none;
   /*float: left;*/
+}
+
+#footer{
+    margin-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.image-container{
+    float:right;
+    padding-top: 10px;
+}
+
+#weapon-equipped-property{
+    margin-right: 0
 }
