@@ -6,9 +6,8 @@ var inBattle = false;
 function fight(){
     resetPlayerVelocity();
     inBattle = true;
-    //Open Fight Window
-    document.getElementsByClassName('modal')[0].style.display = 'block';
     //Show stats, weapon, moves
+    setupFightWindow();
     // List of player moves
     //Fight Loop
         // Select a move
@@ -21,6 +20,18 @@ function fight(){
         // Once someone is dead exit loop
     //Depending on Winner, display some text showing
     //Winner, Loot, Skill Points, Change JSON value of enemy to "fought"
+}
+
+function setupFightWindow(){
+    document.getElementsByClassName('modal')[0].style.display = 'block';
+
+    //set images
+    document.getElementById('player-image').src = 'assets/playerCloseUp.png';
+    document.getElementById('enemy-image').src = npcProfile.enemyImage;
+
+    //set levels
+    document.getElementById('fw-player-level').innerHTML = "Level " + playerProfile.skillLevel;
+    document.getElementById('fw-enemy-level').innerHTML = "Level " + npcProfile.skillLevel;
 }
 
 function loadWeaponStats(){
@@ -38,8 +49,8 @@ function loadWeaponStats(){
  } 
 
 $(document).ready(function() {
-  $('.modal-click').click(function() {
-    document.getElementsByClassName('modal')[0].style.display = 'block';
+  $('#inventory').click(function() {
+    fight();
   });
 //   window.onclick = function(event) {
 //     if (event.target === document.getElementsByClassName('modal')[0]) {

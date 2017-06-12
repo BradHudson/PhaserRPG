@@ -38,18 +38,22 @@
 						<div class='row modal-content'>
 							<!--<span class='close'>×</span>-->
 							<div class='small-12 columns'>
-								<div class="small-8 small-centered columns">
-									<h1>FIGHT!</h1>
+								<div id="fight-header" class="small-8 small-centered columns">
+									<h1>Fight!</h1>
+									<div class = "property">
+										<h3 id="fw-player-level" class = "property"></h3>
+										<img id="player-image"></img>
+									</div>
+									<span> VS </span>
+									<div class = "property">
+										<img id="enemy-image" class = "property"></img>
+										<h3 id="fw-enemy-level" class = "property"></h3>
+									</div>
+								</div>
+								<div class="row" id="moves">
+
 								</div>
 							</div>
-							<!--<div class='small-12 input-field columns'>
-							</div>
-							<div class='small-12 input-field columns'>
-							</div>
-							<div class='small-12 input-field columns'>
-							</div>
-							<div class='small-12 columns sign-up'>
-							</div>-->
 						</div>
 				</div>
 			<div id="gameContainer"></div>
@@ -59,6 +63,7 @@
 			<script type="text/javascript" src="js/mechanics.js"></script>
 			<script type="text/javascript" src="js/dialog.js"></script>
 			<script type="text/javascript" src="js/main.js"></script>
+			<script type="text/javascript" src="js/models/enemy.js"></script>
 			
 
 			<div id="footer">

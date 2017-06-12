@@ -11,9 +11,9 @@
     margin-left: 200px;
 }
 
-* {
+/** {
  font-family: medieval;
-}
+}*/
 
 .property h2{
     font-size: 1.5em;
@@ -25,6 +25,10 @@
 
 .score-card{
     text-align: center;
+}
+
+.property{
+    display: inline-block;
 }
 
 .score-card .property{
@@ -77,7 +81,7 @@
 
 /* Fight Window */
 .modal {
-  /*display: none;*/
+  display: none;
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -94,6 +98,24 @@
   padding: 20px;
   border: 1px solid #888;
   width: 100%; /* Could be more or less, depending on screen size */
+}
+
+#fightWindow{
+    text-align: center;
+}
+
+#fightWindow img{
+    height: 100px;
+}
+
+#player-image{
+    margin-left: 20px;
+    margin-right: 100px;
+}
+
+#enemy-image{
+    margin-right: 20px;
+    margin-left: 100px;
 }
 
 /* The Close Button */

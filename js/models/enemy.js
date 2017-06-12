@@ -2,12 +2,12 @@ var npcProfile = new Enemy(currentStage, currentEnemy);
 var inQuest = false;
 
 function Enemy(stage, enemyID){
-    playerJSON = loadEnemyStats();
-    this.skillLevel = playerJSON.SkillLevel;
-    this.playerHealth = playerJSON.Health;
-    this.playerCheckPoint = playerJSON.Checkpoint;
-    this.playerWeapons = playerJSON.Weapons;
-    this.playerInventory = playerJSON.Inventory;
+    enemyJSON = loadEnemyStats()[currentStage][currentEnemy];
+    this.skillLevel = enemyJSON.SkillLevel;
+    this.enemyHealth = enemyJSON.Health;
+    this.enemyWeapon = enemyJSON.Weapon;
+    this.enemyHaveFought= enemyJSON.HaveFought;
+    this.enemyImage = enemyJSON.ImageSource;
 }
 
 function saveEnemyData(){
