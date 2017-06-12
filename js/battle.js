@@ -4,8 +4,10 @@ var enemiesProfile = loadEnemyStats();
 var inBattle = false;
 
 function fight(){
+    resetPlayerVelocity();
     inBattle = true;
     //Open Fight Window
+    document.getElementsByClassName('modal')[0].style.display = 'block';
     //Show stats, weapon, moves
     // List of player moves
     //Fight Loop
@@ -34,3 +36,17 @@ function loadWeaponStats(){
    request.send(null);
    return JSON.parse(request.responseText);
  } 
+
+$(document).ready(function() {
+  $('.modal-click').click(function() {
+    document.getElementsByClassName('modal')[0].style.display = 'block';
+  });
+//   window.onclick = function(event) {
+//     if (event.target === document.getElementsByClassName('modal')[0]) {
+//       document.getElementsByClassName('modal')[0].style.display = 'none';
+//     }
+//   };
+//   $('.close').click(function() {
+//     document.getElementsByClassName('modal')[0].style.display = 'none';
+//   });
+});

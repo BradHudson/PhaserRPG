@@ -54,6 +54,8 @@ function setKeys(){
 				player.frame = 1;
 			}
 		}
+	} else{
+		resetPlayerVelocity();
 	}
 }
 

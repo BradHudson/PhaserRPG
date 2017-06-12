@@ -3,7 +3,8 @@
         "Weapon": "Limb",
         "Health": 10,
         "SkillLevel": 1,
-        "HaveFought": false
+        "HaveFought": false,
+        "ImageSource": "assets/adam.png"
     }
 }
 }
