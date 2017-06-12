@@ -4,25 +4,27 @@ var enemiesProfile = loadEnemyStats();
 var inBattle = false;
 var flashStep = 1;
 var keepFlashing = true;
+var playerDamageCaused;
+var enemyDamageCaused;
 
 function fight(){
     resetPlayerVelocity();
     inBattle = true;
-    //Show stats, weapon, moves
     window.setInterval(flash,200);
     setTimeout( setupFightWindow, 1000 );
-    // List of player moves
-    //Fight Loop
-        // Select a move
-        // Randomize to see if lands
-        // Use SkillLevel to determine amount of damage
-        // Reduce health of enemy
-        // Enemy uses only move
-        //Randomize
-        // If it lands, reduce players health
-        // Once someone is dead exit loop
-    //Depending on Winner, display some text showing
-    //Winner, Loot, Skill Points, Change JSON value of enemy to "fought"
+    while(inBattle === true){
+        if(playerTurn === true){
+            $('.player-move-button').click(function() {
+                playerDamageCaused = determineDamage(this);
+                updateStats()
+            });
+        }else{
+            enemyDamageCaused = randomizeDamage(npcProfile.enemyWeapon);
+            updateStats()
+        }
+        updateCommentary();
+    }
+    displayLootAndStats();
 }
 
 function setupFightWindow(){
@@ -48,6 +50,10 @@ function setupFightWindow(){
     document.getElementById('fw-player-move2').innerHTML = getWeaponMoves(playerProfile.equippedWeapon)[1].Name;
     document.getElementById('fw-enemy-move1').innerHTML = getWeaponMoves(npcProfile.enemyWeapon)[0].Name;
     document.getElementById('fw-enemy-move2').innerHTML = getWeaponMoves(npcProfile.enemyWeapon)[1].Name;
+}
+
+function determineDamage(){
+
 }
 
 function loadWeaponStats(){
