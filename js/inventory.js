@@ -43,10 +43,14 @@ function updateWeaponEquipped(item){
     var weaponImage = document.getElementById('weapon-image');
     weaponImage.style.display = 'block';
     weaponImage.src = weaponsProfile[item.name].ImageSource;
-    playerProfile.equippedWeapon = item;
+    playerProfile.equippedWeapon = item.name;
     document.getElementById('weapon-equipped').innerHTML = item.name;
 }
 
 function weaponEquipped(){
     playerProfile.equippedWeapon != "";
+}
+
+function getWeaponMoves(item){
+    return weaponsProfile[item].Moves;
 }

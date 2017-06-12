@@ -68,7 +68,7 @@
                 inQuest = true;
                 startConversation(dialogArray);
                 if(stageOfNPCConversation === 1){
-                    fight(currentStage,whoWeTalkingTo);
+                    setTimeout(fight, 1500);
                 }
             }
         }

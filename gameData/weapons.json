@@ -2,15 +2,17 @@
     "ImageSource": "assets/weaponicons/limb.png",
     "Attack": 1,
     "Defense": 1,
-    "Moves": {
-        "Strike": {
+    "Moves": [
+        {
+            "Name": "Strike",
             "Chance": 90,
             "Damage": 10
         },
-        "Powerful Strike": {
+        {
+            "Name": "Powerful Strike",
             "Chance": 25,
             "Damage": 25
         }
-    }
+    ]
 }
 }
