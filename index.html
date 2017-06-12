@@ -33,28 +33,41 @@
 				</div>
 				</div>
 			</div>
-				<div class='modal' id='fightWindow'>
-					<div class='small-12 medium-8 medium-centered columns'></div>
-						<div class='row modal-content'>
-							<!--<span class='close'>×</span>-->
-							<div class='small-12 columns'>
-								<div id="fight-header" class="small-8 small-centered columns">
-									<h1>Fight!</h1>
-									<div class = "property">
-										<h3 id="fw-player-level" class = "property"></h3>
-										<img id="player-image"></img>
-									</div>
-									<span> VS </span>
-									<div class = "property">
-										<img id="enemy-image" class = "property"></img>
-										<h3 id="fw-enemy-level" class = "property"></h3>
-									</div>
+			<div class='modal' id='fightWindow'>
+				<div class='small-12 medium-8 medium-centered columns'></div>
+					<div class='row modal-content'>
+						<!--<span class='close'>×</span>-->
+						<div class='small-12 columns'>
+							<div id="fight-header" class="small-8 small-centered columns">
+								<div class = "property">
+									<h3 id="fw-player-level" class = "property"></h3>
+									<img id="player-image"></img>
 								</div>
-								<div class="row" id="moves">
-
+								<span> VS </span>
+								<div class = "property">
+									<img id="enemy-image" class = "property"></img>
+									<h3 id="fw-enemy-level" class = "property"></h3>
+								</div>
+							</div>
+							<div class="row">
+								<div class='small-6 columns'>
+									<h4 id = "fw-player-weapon">Weapon: Limb</h4>
+									<h5>Moveset</h5>
+									<button id="fw-move1" class= "button">Strike</button>
+									<button id="fw-move2" class= "button">Powerful Strike</button>
+								</div>
+								<div class='small-6 columns'>
+									<h4 id = "fw-player-weapon">Weapon: Limb</h4>
+									<h5>Moveset</h5>
+									<button class= "button">Strike</button>
+									<button class= "button">Power Strike</button>
 								</div>
 							</div>
 						</div>
+						<div class = "small-8 small-centered columns">
+							<h2 id="fight-commentary">Select a Move Hero</h2>
+						</div>
+					</div>
 				</div>
 			<div id="gameContainer"></div>
 			<script type="text/javascript" src="js/models/player.js"></script>
