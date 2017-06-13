@@ -46,6 +46,7 @@
     }
 
     function handleBigTreeCollision() {
+        ensureBigTreeSize();
         if(Phaser.Rectangle.intersects(player.getBounds(), bigTreeSprite.getBounds()) && actionKeyAndAllowCollision() && inQuest === true){
             whoWeTalkingTo = "BigTree";
             allowCollision = false;
@@ -132,4 +133,11 @@
         npc.body.collideWorldBounds = true;
         npc.position.x = map.objects.NPC[0].x
         npc.position.y = map.objects.NPC[0].y
+    }
+
+    function ensureBigTreeSize() {
+        if(bigTreeSprite.width <= 100 || bigTreeSprite.height <= 100){
+            bigTreeSprite.width = 224;
+            bigTreeSprite.height = 224;
+        }
     }
