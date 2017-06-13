@@ -6,25 +6,18 @@ var flashStep = 1;
 var keepFlashing = true;
 var playerDamageCaused;
 var enemyDamageCaused;
+var playerTurn = true;
+var playerMove1;
+var playerMove2;
+var enemyMove1;
+var enemyMove2;
+var whosTurn = 'Player';
 
 function fight(){
     resetPlayerVelocity();
     inBattle = true;
     window.setInterval(flash,200);
     setTimeout( setupFightWindow, 1000 );
-    while(inBattle === true){
-        if(playerTurn === true){
-            $('.player-move-button').click(function() {
-                playerDamageCaused = determineDamage(this);
-                updateStats()
-            });
-        }else{
-            enemyDamageCaused = randomizeDamage(npcProfile.enemyWeapon);
-            updateStats()
-        }
-        updateCommentary();
-    }
-    displayLootAndStats();
 }
 
 function setupFightWindow(){
@@ -46,14 +39,81 @@ function setupFightWindow(){
     document.getElementById('fw-enemy-weapon').innerHTML = "Weapon: " + npcProfile.enemyWeapon;
 
     //set moves
-    document.getElementById('fw-player-move1').innerHTML = getWeaponMoves(playerProfile.equippedWeapon)[0].Name;
-    document.getElementById('fw-player-move2').innerHTML = getWeaponMoves(playerProfile.equippedWeapon)[1].Name;
-    document.getElementById('fw-enemy-move1').innerHTML = getWeaponMoves(npcProfile.enemyWeapon)[0].Name;
-    document.getElementById('fw-enemy-move2').innerHTML = getWeaponMoves(npcProfile.enemyWeapon)[1].Name;
+    playerMove1 = getWeaponMoves(playerProfile.equippedWeapon)[0].Name;
+    playerMove2 = getWeaponMoves(playerProfile.equippedWeapon)[1].Name;
+    enemyMove1 = getWeaponMoves(npcProfile.enemyWeapon)[0].Name;
+    enemyMove2 = getWeaponMoves(npcProfile.enemyWeapon)[1].Name;
+
+    document.getElementById('fw-player-move1').innerHTML = playerMove1;
+    document.getElementById('fw-player-move2').innerHTML = playerMove2;
+    document.getElementById('fw-enemy-move1').innerHTML = enemyMove1;
+    document.getElementById('fw-enemy-move2').innerHTML = enemyMove2;
+
+    $('#fw-player-move1').click(function(){
+        if(whosTurn === 'Player'){
+            attemptMove(playerProfile.equippedWeapon,0);
+        }  
+    });
+    $('#fw-player-move2').click(function(){
+        if(whosTurn === 'Player'){
+            attemptMove(playerProfile.equippedWeapon,1);
+        }  
+    });
+}
+
+function attemptMove(item,moveIndex){
+    moveDetails = weaponsProfile[item].Moves[moveIndex];
+    updateFightCommentary(whosTurn + " performs " + moveDetails.Name);
+    setTimeout(function(){ 
+       damageDone = determineDamage.bind(moveDetails)();
+        if(whosTurn === 'Player'){
+        updateNPCStats(damageDone);
+        } else{
+            updatePlayerStats(damageDone);
+        }
+     }, 1000);
 }
 
 function determineDamage(){
+    highestSuccessValue = Math.floor(Math.random() * 100) + 1;
+    //playerValue = Math.floor(Math.random() * moveDetails.Chance) + 1;
+    if(highestSuccessValue > moveDetails.Chance){
+        updateFightCommentary(whosTurn + " attempts " + moveDetails.Name + " and Misses!");
+        return 0;
+    } else {
+        updateFightCommentary(whosTurn + " attempts " + moveDetails.Name + " and Lands Dealing " + moveDetails.Damage +  " Damage!");
+        return moveDetails.Damage;
+    }
+}
 
+function updateNPCStats(damage){
+    setTimeout(function(){
+        npcProfile.enemyHealth = npcProfile.enemyHealth - damage;
+        if(npcProfile.enemyHealth < 1){
+            updateFightCommentary("The enemy has been Killed!");
+            inBattle = false;
+            setTimeout(endOfFight,1000);
+        }else{
+            updateFightCommentary("The enemy has " + npcProfile.enemyHealth + " Health Remaining.");
+            whosTurn = 'Enemy';
+            setTimeout(function(){
+                attemptMove(npcProfile.enemyWeapon,Math.floor(Math.random() * 2))
+            }, 1000);
+        }
+     },1000)
+}
+
+function updatePlayerStats(damage){
+    setTimeout(function(){
+    playerProfile.playerHealth = playerProfile.playerHealth - damage;
+    if(playerProfile.playerHealth < 1){
+        updateFightCommentary("Player has been Killed!");
+        inBattle = false;
+        setTimeout(endOfFight,1000);
+    }else{
+        updateFightCommentary("Player has " + playerProfile.playerHealth + " Remaining. You're Turn Hero!");
+        whosTurn = 'Player';
+    }}, 1000);
 }
 
 function loadWeaponStats(){
@@ -84,16 +144,22 @@ function loadWeaponStats(){
     }
 }
 
+function updateFightCommentary(text){
+    document.getElementById('fight-commentary').innerHTML = text;
+}
 
+function endOfFight(){
+    document.getElementsByClassName('modal')[0].style.display = 'none';
+}
 
 
 $(document).ready(function() {
-//   $('#inventory').click(function() {
+//  $('#inventory').click(function() {
 //     fight();
 //   });
 //   window.onclick = function(event) {
 //     if (event.target === document.getElementsByClassName('modal')[0]) {
-//       document.getElementsByClassName('modal')[0].style.display = 'none';
+      
 //     }
 //   };
 //   $('.close').click(function() {

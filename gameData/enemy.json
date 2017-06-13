@@ -1,7 +1,7 @@
 { "Stage1": {
     "NPC1": {
         "Weapon": "Limb",
-        "Health": 10,
+        "Health": 30,
         "SkillLevel": 1,
         "HaveFought": false,
         "ImageSource": "assets/adam.png"
