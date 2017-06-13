@@ -3,31 +3,93 @@
     <head>
         <meta charset="UTF-8" />
         <title>hello phaser!</title>
+		<link rel="stylesheet" type="text/css" href="js/vendor/foundation.min.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
         <script src="//cdn.jsdelivr.net/phaser/2.5.0/phaser.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/vendor/jquery.js"></script>
+		<script type="text/javascript" src="js/vendor/foundation.min.js"></script>
+		<script type="text/javascript" src="js/vendor/jquery.js"></script>
     </head>
     <body>
+		<div id="main-game">
+			<div class="row">
+				<div class='small-12 small-centered columns'>
+					<div class="score-card">
+						<div class="property"><h2>Level: </h2><span id="player-level" class="amount">0</span></div>
+						<div class="property"><h2>Health: </h2><span id="player-health" class="amount"> 0</span></div>
+						<div class="property"><h2>Attack: </h2><span id="player-attack" class="amount"> 0</span></div>
+						<div class="property" id="weapon-equipped-property"><h2>Weapon Equipped: </h2><div class="image-container"><img id="weapon-image" src="" height=44 width=44></img></div><span id="weapon-equipped" class="amount">N/A</span></div>
+						<div class="property"><h2>Armor Equipped: </h2><span id="armor" class="amount">N/A</span></div>
+						<button onclick="showInventory()" id="inventory" class="button">Inventory</button>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class='small-12 medium-8 medium-centered columns'>
+				<div id="inventory-menu">
+					<label>Weapons</label>
+					<ul id="weapon-list">
+					</ul>
+				</div>
+				</div>
+			</div>
+			<div id="flashScreen"></div>
+			<div class='modal' id='fightWindow'>
+				<div class='small-12 medium-8 medium-centered columns'></div>
+					<div class='row modal-content'>
+						<!--<span class='close'>×</span>-->
+						<div class='small-12 columns'>
+							<div id="fight-header" class="small-8 small-centered columns">
+								<div class = "property">
+									<h3 id="fw-player-level" class = "property"></h3>
+									<img id="player-image"></img>
+								</div>
+								<span> VS </span>
+								<div class = "property">
+									<img id="enemy-image" class = "property"></img>
+									<h3 id="fw-enemy-level" class = "property"></h3>
+								</div>
+							</div>
+							<div class="row">
+								<div class='small-6 columns'>
+									<h4 id = "fw-player-weapon"></h4>
+									<h5>Moves:</h5>
+									<button id="fw-player-move1" class= "button player-move-button"></button>
+									<button id="fw-player-move2" class= "button player-move-button"></button>
+								</div>
+								<div class='small-6 columns'>
+									<h4 id = "fw-enemy-weapon"></h4>
+									<h5>Moves:</h5>
+									<div>
+										<h5 id="fw-enemy-move1"></h5>
+										<h5 id="fw-enemy-move2"></h5>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class = "small-8 small-centered columns">
+							<h2 id="fight-commentary">Select a Move Hero</h2>
+						</div>
+					</div>
+				</div>
+			<div class="row">
+				<div class='small-12 small-centered columns'>
+					<div id="gameContainer"></div>
+				</div>
+			</div>
+			<script type="text/javascript" src="js/models/player.js"></script>
+			<script type="text/javascript" src="js/battle.js"></script>
+			<script type="text/javascript" src="js/inventory.js"></script>
+			<script type="text/javascript" src="js/mechanics.js"></script>
+			<script type="text/javascript" src="js/dialog.js"></script>
+			<script type="text/javascript" src="js/main.js"></script>
+			<script type="text/javascript" src="js/models/enemy.js"></script>
+			
+
+			<div id="footer">
+				----- A Mediocre RPG created by Brad Hudson -----
+			</div>
 
 		</div>
-		<div class="score-card">
-			<div class="property"><h2>Level: </h2><span id="player-level" class="amount">0</span></div>
-			<div class="property"><h2>Health: </h2><span id="player-health" class="amount"> 0</span></div>
-			<div class="property"><h2>Attack: </h2><span id="player-attack" class="amount"> 0</span></div>
-			<div class="property"><h2>Weapon Equipped: </h2><span id="weapon-equipped" class="amount">N/A</span></div>
-			<div class="property"><h2>Armor Equipped: </h2><span id="armor" class="amount">N/A</span></div>
-			<button onclick="showInventory()" id="inventory">Inventory</button>
-		</div>
-		<div id="inventory-menu">
-			<label>Weapons</label>
-			<ul id="weapon-list">
-			</ul>
-		</div>
-		<div id="gameContainer"></div>
-		<script type="text/javascript" src="js/inventory.js"></script>
-		<script type="text/javascript" src="js/mechanics.js"></script>
-		<script type="text/javascript" src="js/dialog.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>
-

@@ -8,8 +8,8 @@ function showInventory(){
 }
 
 function addWeaponToInventory(item){
-    if(weaponList.indexOf(item) === -1){
-        weaponList.push(item);
+    if(playerProfile.playerWeapons.indexOf(item) === -1){
+        playerProfile.playerWeapons.push(item);
         var ul = document.getElementById("weapon-list");
         var li = document.createElement("li");
 
@@ -32,13 +32,25 @@ function addWeaponToInventory(item){
 
 function selectOnlyThis() {
     updateWeaponEquipped(this);
-    for (var i = 0; i <= weaponList.length - 1; i++)
+    for (var i = 0; i <= playerProfile.playerWeapons.length - 1; i++)
     {
-        document.getElementById(weaponList[i]).checked = false;
+        document.getElementById(playerProfile.playerWeapons[i]).checked = false;
     }
     this.checked = true;
 }
 
 function updateWeaponEquipped(item){
+    var weaponImage = document.getElementById('weapon-image');
+    weaponImage.style.display = 'block';
+    weaponImage.src = weaponsProfile[item.name].ImageSource;
+    playerProfile.equippedWeapon = item.name;
     document.getElementById('weapon-equipped').innerHTML = item.name;
+}
+
+function weaponEquipped(){
+    playerProfile.equippedWeapon != "";
+}
+
+function getWeaponMoves(item){
+    return weaponsProfile[item].Moves;
 }

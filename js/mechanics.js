@@ -1,59 +1,63 @@
 function setKeys(){
-    if (cursors.left.isDown){
-		if(spaceKey.isDown)
-		{
-			speed = -500;
-		}else{
-			speed = -300;
+	if(inBattle === false){
+		if (cursors.left.isDown){
+			if(spaceKey.isDown)
+			{
+				speed = -500;
+			}else{
+				speed = -300;
+			}
+			player.body.velocity.x = speed
+			player.animations.play('left');
+			direction = "left";
+		} else if (cursors.right.isDown){
+			if(spaceKey.isDown)
+			{
+				speed = 500;
+			}else{
+				speed = 300;
+			}
+			player.body.velocity.x = speed
+			player.animations.play('right');
+			direction = "right";
+		} else if (cursors.up.isDown) {
+			if(spaceKey.isDown)
+			{
+				speed = -500;
+			}else{
+				speed = -300;
+			}
+			player.body.velocity.y = speed
+			//player.body.moveUp(speed);
+			player.animations.play('up');
+			direction = "up";
+		} else if (cursors.down.isDown) {
+			if(spaceKey.isDown)
+			{
+				speed = 500;
+			}else{
+				speed = 300;
+			}
+			player.body.velocity.y = speed
+			//player.body.moveDown(speed);
+			player.animations.play('down');
+			direction = "down";
+		} else {
+			player.animations.stop(null, true);
+			if(direction === "left"){
+				player.frame = 4;
+			}else if(direction === "right"){
+				player.frame = 7;
+			}else if(direction === "up"){
+				player.frame = 10;
+			}else{
+				player.frame = 1;
+			}
 		}
-		player.body.velocity.x = speed
-		player.animations.play('left');
-		direction = "left";
-	} else if (cursors.right.isDown){
-		if(spaceKey.isDown)
-		{
-			speed = 500;
-		}else{
-			speed = 300;
-		}
-		player.body.velocity.x = speed
-		player.animations.play('right');
-		direction = "right";
-	} else if (cursors.up.isDown) {
-		if(spaceKey.isDown)
-		{
-			speed = -500;
-		}else{
-			speed = -300;
-		}
-		player.body.velocity.y = speed
-		//player.body.moveUp(speed);
-		player.animations.play('up');
-		direction = "up";
-	} else if (cursors.down.isDown) {
-		if(spaceKey.isDown)
-		{
-			speed = 500;
-		}else{
-			speed = 300;
-		}
-		player.body.velocity.y = speed
-		//player.body.moveDown(speed);
-		player.animations.play('down');
-		direction = "down";
-	} else {
-		player.animations.stop(null, true);
-		if(direction === "left"){
-			player.frame = 4;
-		}else if(direction === "right"){
-			player.frame = 7;
-		}else if(direction === "up"){
-			player.frame = 10;
-		}else{
-			player.frame = 1;
-		}
-	    }
-    }
+	} else{
+		resetPlayerVelocity();
+	}
+}
 
 function resetPlayerVelocity(){
     player.body.velocity.x = 0

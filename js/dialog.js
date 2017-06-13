@@ -1,3 +1,12 @@
+var conversationJSON = loadJSONConversations();
+var dialogArray;
+var indexOfDialog = 0;
+var inConversation = false;
+var textOnScreen;
+var whoWeTalkingTo = '';
+var stageOfNPCConversation = 0;
+var stageOfTreeConversation = 0;
+
 function startConversation(dialogArray) {
         inConversation = true;
         indexOfDialog = 0;
@@ -19,6 +28,8 @@ document.body.onkeyup = function(e){
             textOnScreen.text = "";
             inConversation = false;
             indexOfDialog = 0;
+            updateStageOfConversation(whoWeTalkingTo);
+            whoWeTalkingTo = "";
         }else{
         displayNextDialog();
         indexOfDialog = indexOfDialog + 1;
@@ -37,4 +48,15 @@ document.body.onkeyup = function(e){
     textOnScreen = game.add.text(200, 500, "", { font: "24px Arial", fill: "#ffffff", align: "center" });
     textOnScreen.fixedToCamera = true;
     textOnScreen.cameraOffset.setTo(200, 500);
+ }
+
+ function updateStageOfConversation(whoWeTalkingTo){
+     switch(whoWeTalkingTo){
+         case "NPC1":
+            stageOfNPCConversation = stageOfNPCConversation + 1;
+            break;
+         case "BigTree":
+            stageOfTreeConversation = stageOfTreeConversation + 1;
+            break;
+     }
  }

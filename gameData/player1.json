@@ -1,0 +1,8 @@
+{ "SkillLevel": 1,
+  "Health": 100,
+  "Checkpoint": 1,
+  "Weapons": [],
+  "Inventory": [],
+  "EquippedWeapon": "",
+  "EquippedItem": ""
+}
