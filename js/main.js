@@ -69,7 +69,8 @@
                 inQuest = true;
                 startConversation(dialogArray);
                 if(stageOfNPCConversation === 1){
-                    setTimeout(fight, 1500);
+                    setTimeout(function(){
+                        fight('NPC',2,3)}, 1500);  
                 }
             }
         }

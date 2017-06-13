@@ -1,4 +1,7 @@
-var currentEnemy = "NPC1";
+var currentEnemy;
+var npcProfile;
+var winningConvoIndex;
+var losingConvoIndex;
 var weaponsProfile = loadWeaponStats();
 var enemiesProfile = loadEnemyStats();
 var inBattle = false;
@@ -12,8 +15,13 @@ var playerMove2;
 var enemyMove1;
 var enemyMove2;
 var whosTurn = 'Player';
+var playerWon;
 
-function fight(){
+function fight(enemy,winningIndex,losingIndex){
+    npcProfile = new Enemy(currentStage, enemy);
+    currentEnemy = enemy;
+    winningConvoIndex = winningIndex;
+    losingConvoIndex = losingIndex;
     resetPlayerVelocity();
     inBattle = true;
     window.setInterval(flash,200);
@@ -91,7 +99,7 @@ function updateNPCStats(damage){
         npcProfile.enemyHealth = npcProfile.enemyHealth - damage;
         if(npcProfile.enemyHealth < 1){
             updateFightCommentary("The enemy has been Killed!");
-            inBattle = false;
+            playerWon = true;
             setTimeout(endOfFight,1000);
         }else{
             updateFightCommentary("The enemy has " + npcProfile.enemyHealth + " Health Remaining.");
@@ -108,7 +116,7 @@ function updatePlayerStats(damage){
     playerProfile.playerHealth = playerProfile.playerHealth - damage;
     if(playerProfile.playerHealth < 1){
         updateFightCommentary("Player has been Killed!");
-        inBattle = false;
+        playerWon = false;
         setTimeout(endOfFight,1000);
     }else{
         updateFightCommentary("Player has " + playerProfile.playerHealth + " Remaining. You're Turn Hero!");
@@ -150,6 +158,14 @@ function updateFightCommentary(text){
 
 function endOfFight(){
     document.getElementsByClassName('modal')[0].style.display = 'none';
+    if(playerWon === true){
+        dialogArray = conversationJSON.Level1[currentEnemy][winningConvoIndex];
+        startConversation(dialogArray);
+    }else{
+        dialogArray = conversationJSON.Level1[currentEnemy][losingConvoIndex];
+        startConversation(dialogArray);
+    }
+    inBattle = false;
 }
 
 

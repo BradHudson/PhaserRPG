@@ -1,5 +1,5 @@
 { "Stage1": {
-    "NPC1": {
+    "NPC": {
         "Weapon": "Limb",
         "Health": 30,
         "SkillLevel": 1,
