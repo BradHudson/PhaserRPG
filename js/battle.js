@@ -84,7 +84,6 @@ function attemptMove(item,moveIndex){
 
 function determineDamage(){
     highestSuccessValue = Math.floor(Math.random() * 100) + 1;
-    //playerValue = Math.floor(Math.random() * moveDetails.Chance) + 1;
     if(highestSuccessValue > moveDetails.Chance){
         updateFightCommentary(whosTurn + " attempts " + moveDetails.Name + " and Misses!");
         return 0;
