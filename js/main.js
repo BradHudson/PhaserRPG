@@ -127,13 +127,17 @@
 
     function addNPC(){
         //add enemy/NPC's
-        npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
+        //npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
+        npc = new NPC(game, 'adam');
+        npc = game.add.existing(npc);
         game.physics.enable(npc, Phaser.Physics.ARCADE);
-        npc.body.immovable = true;
-        npc.body.moves =false;
+        //npc.body.immovable = true;
+        //npc.body.moves =false;
         npc.body.collideWorldBounds = true;
         npc.position.x = map.objects.NPC[0].x
         npc.position.y = map.objects.NPC[0].y
+
+
     }
 
     function ensureBigTreeSize() {
