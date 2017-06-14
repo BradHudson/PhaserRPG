@@ -73,3 +73,33 @@ function addPlayerAnimations() {
     player.animations.add('up', [9, 10, 11], 10, true);
     cursors = game.input.keyboard.createCursorKeys();
 }
+
+function makeWander(npcInfo, moveUp = true, goHome = false){
+	var object = npcInfo.object;
+	if(inConversation === true){
+		setTimeout(function(){ return makeWander(npcInfo, moveUp) }, 1000);
+	}else{
+	if(goHome === false){
+		if(moveUp === true){
+			game.physics.arcade.moveToXY(object, object.position.x, object.position.y - 10);
+		}else { game.physics.arcade.moveToXY(object, object.position.x, object.position.y + 10); }
+		setTimeout(function(){
+			object.body.velocity.x = 0; 
+			object.body.velocity.y = 0;
+			return makeWander(npcInfo, false, true)
+		}, 3000);
+	} else{ //return to start position
+		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1]);
+		setTimeout(function(){
+			object.body.velocity.x = 0; 
+			object.body.velocity.y = 0;
+			return makeWander(npcInfo, true)
+		}, 3000);
+	}
+	}
+}
+
+function setVelocityZero(object){
+	object.body.velocity.x = 0; 
+	object.body.velocity.y = 0;
+}

@@ -10,6 +10,7 @@
     var bigTreeSprite;
     var npc;
     var currentStage = "Stage1";
+    var npcInformation;
     
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
@@ -59,7 +60,7 @@
     }
 
     function handleNPCCollision() {
-        game.physics.arcade.collide(player, npc);
+        game.physics.arcade.collide(player, npc, function(){ setVelocityZero(npc); });
         if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
             whoWeTalkingTo = "NPC1";
             allowCollision = false;
@@ -128,14 +129,15 @@
     function addNPC(){
         //add enemy/NPC's
         npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
+        npcInformation = new Enemy(currentStage, "NPC", npc);
         game.physics.enable(npc, Phaser.Physics.ARCADE);
         npc.body.immovable = true;
         //npc.body.moves =false;
         npc.body.collideWorldBounds = true;
         npc.position.x = map.objects.NPC[0].x
         npc.position.y = map.objects.NPC[0].y
-
-
+        npcInformation.startXY = [npc.position.x,npc.position.y];
+        makeWander(npcInformation, true);
     }
 
     function ensureBigTreeSize() {

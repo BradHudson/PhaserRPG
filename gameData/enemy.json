@@ -4,7 +4,8 @@
         "Health": 30,
         "SkillLevel": 1,
         "HaveFought": false,
-        "ImageSource": "assets/adam.png"
+        "ImageSource": "assets/adam.png",
+        "ShouldWander": true
     }
 }
 }
