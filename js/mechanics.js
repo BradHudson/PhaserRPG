@@ -85,12 +85,19 @@ function makeWander(npcInfo, moveUp = true, goHome = false){
 	if(goHome === false){
 		if(moveUp === true){
 			game.physics.arcade.moveToXY(object, object.position.x, object.position.y - 10);
-		}else { game.physics.arcade.moveToXY(object, object.position.x, object.position.y + 10); }
+			npc.loadTexture('adam-back');
+		}else { 
+			game.physics.arcade.moveToXY(object, object.position.x, object.position.y + 10); 
+			npc.loadTexture('adam');
+		}
 		setTimeout(function(){
 			setVelocityZero(object);
 			return makeWander(npcInfo, !moveUp, true);
 		}, 2000);
 	} else{ //return to start position
+		if(moveUp === true){
+			npc.loadTexture('adam-back');
+		}else{npc.loadTexture('adam');}
 		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1],60,2000);
 		setTimeout(function(){
 			setVelocityZero(object);

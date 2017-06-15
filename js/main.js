@@ -15,6 +15,7 @@
     function preload() {
         game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
 	    game.load.spritesheet('adam', 'assets/adam.png', 30, 32);
+        game.load.spritesheet('adam-back', 'assets/adam-back.png', 30, 32);
         game.load.spritesheet('gus', 'assets/gus.png', 30, 32);
         game.load.tilemap('MyTilemap', 'rpgmap.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('grass', 'assets/grass-tiles.png');
@@ -128,7 +129,7 @@
 
     function addNPC(){
         //add enemy/NPC's
-        npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
+        npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam-back');
         npcInformation = new Enemy(currentStage, "NPC", npc);
         game.physics.enable(npc, Phaser.Physics.ARCADE);
         npc.body.immovable = true;
