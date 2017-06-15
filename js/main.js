@@ -137,7 +137,7 @@
         npc.position.x = map.objects.NPC[0].x
         npc.position.y = map.objects.NPC[0].y
         npcInformation.startXY = [npc.position.x,npc.position.y];
-        makeWander(npcInformation, true);
+        //makeWander(npcInformation, true);
     }
 
     function ensureBigTreeSize() {

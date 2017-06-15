@@ -74,6 +74,9 @@ function addPlayerAnimations() {
     cursors = game.input.keyboard.createCursorKeys();
 }
 
+//USE THIS npc.body.moveTo(3000, 100, 270); up
+//npc.body.moveTo(3000, 100, 90); down
+
 function makeWander(npcInfo, moveUp = true, goHome = false){
 	var object = npcInfo.object;
 	if(inConversation === true){
@@ -89,12 +92,12 @@ function makeWander(npcInfo, moveUp = true, goHome = false){
 			return makeWander(npcInfo, false, true)
 		}, 3000);
 	} else{ //return to start position
-		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1]);
-		setTimeout(function(){
-			object.body.velocity.x = 0; 
-			object.body.velocity.y = 0;
-			return makeWander(npcInfo, true)
-		}, 3000);
+		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1],60,3000);
+		// setTimeout(function(){
+		// 	object.body.velocity.x = 0; 
+		// 	object.body.velocity.y = 0;
+		// 	return makeWander(npcInfo, true)
+		// }, 3000);
 	}
 	}
 }
