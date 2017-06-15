@@ -87,17 +87,15 @@ function makeWander(npcInfo, moveUp = true, goHome = false){
 			game.physics.arcade.moveToXY(object, object.position.x, object.position.y - 10);
 		}else { game.physics.arcade.moveToXY(object, object.position.x, object.position.y + 10); }
 		setTimeout(function(){
-			object.body.velocity.x = 0; 
-			object.body.velocity.y = 0;
-			return makeWander(npcInfo, false, true)
-		}, 3000);
+			setVelocityZero(object);
+			return makeWander(npcInfo, !moveUp, true);
+		}, 2000);
 	} else{ //return to start position
-		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1],60,3000);
-		// setTimeout(function(){
-		// 	object.body.velocity.x = 0; 
-		// 	object.body.velocity.y = 0;
-		// 	return makeWander(npcInfo, true)
-		// }, 3000);
+		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1],60,2000);
+		setTimeout(function(){
+			setVelocityZero(object);
+			return makeWander(npcInfo, moveUp);
+		}, 2000);
 	}
 	}
 }

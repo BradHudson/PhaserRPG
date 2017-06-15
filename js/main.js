@@ -132,12 +132,13 @@
         npcInformation = new Enemy(currentStage, "NPC", npc);
         game.physics.enable(npc, Phaser.Physics.ARCADE);
         npc.body.immovable = true;
+        npc.body.stopVelocityOnCollide = true;
         //npc.body.moves =false;
         npc.body.collideWorldBounds = true;
         npc.position.x = map.objects.NPC[0].x
         npc.position.y = map.objects.NPC[0].y
         npcInformation.startXY = [npc.position.x,npc.position.y];
-        //makeWander(npcInformation, true);
+        makeWander(npcInformation, true);
     }
 
     function ensureBigTreeSize() {
