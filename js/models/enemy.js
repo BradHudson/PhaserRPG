@@ -2,6 +2,7 @@ var inQuest = false;
 
 function Enemy(stage, enemyID, object = nil){
     enemyJSON = loadEnemyStats()[stage][enemyID];
+    this.name = enemyJSON.Name;
     this.skillLevel = enemyJSON.SkillLevel;
     this.enemyHealth = enemyJSON.Health;
     this.enemyWeapon = enemyJSON.Weapon;

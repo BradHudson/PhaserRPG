@@ -7,6 +7,7 @@
         "HaveFought": false,
         "LoadImage": "assets/characters/adam/adam.png",
         "ImageSource": ["assets/characters/adam/adam.png", "assets/characters/adam/adam-back.png"],
-        "ShouldWander": true
+        "ShouldWander": true,
+        "ID": 0
     }]
 }

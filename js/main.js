@@ -13,15 +13,7 @@
     var npcInformation;
     
     function preload() {
-        game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
-	    game.load.spritesheet('adam', 'assets/adam.png', 30, 32);
-        game.load.spritesheet('adam-back', 'assets/adam-back.png', 30, 32);
-        game.load.spritesheet('gus', 'assets/gus.png', 30, 32);
-        game.load.tilemap('MyTilemap', 'rpgmap.json', null, Phaser.Tilemap.TILED_JSON);
-        game.load.image('grass', 'assets/grass-tiles.png');
-        game.load.image('tree', 'assets/tree-tile.png');
-		game.load.image('red', 'assets/RED.png');
-        game.load.image('terrain-atlas', 'assets/terrain_atlas.png')
+        loadAssetsByStage(currentStage);
     }
     function create() {
         spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -130,34 +122,22 @@
     function addNPC(){
         npcJSONForCurrentStage = loadEnemyStats()[currentStage];
         //add enemy/NPC's
-        for(var npc in npcJSONForCurrentStage){
-            createSprite(npc);
+        for (var i = 0; i < npcJSONForCurrentStage.length; i++){
+            createSprite(npcJSONForCurrentStage[i]);
         }
-        // npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
-        // npcInformation = new Enemy(currentStage, "NPC", npc);
-        // game.physics.enable(npc, Phaser.Physics.ARCADE);
-        // npc.body.immovable = true;
-        // npc.body.stopVelocityOnCollide = true;
-        // //npc.body.moves =false;
-        // npc.body.collideWorldBounds = true;
-        // npc.position.x = map.objects.NPC[0].x
-        // npc.position.y = map.objects.NPC[0].y
-        // npcInformation.startXY = [npc.position.x,npc.position.y];
-        // makeWander(npcInformation, true);
     }
 
-    function createSprite(npc2){
-        npc2 = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
-        npcInformation = new Enemy(currentStage, "NPC", npc);
+    function createSprite(npcInfo){
+        npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, npcInfo.LoadImage);
+        npcInformation = new Enemy(currentStage, npcInfo.ID, npc);
         game.physics.enable(npc, Phaser.Physics.ARCADE);
         npc.body.immovable = true;
         npc.body.stopVelocityOnCollide = true;
-        //npc.body.moves =false;
         npc.body.collideWorldBounds = true;
-        npc.position.x = map.objects.NPC[0].x
-        npc.position.y = map.objects.NPC[0].y
+        npc.position.x = map.objects.NPC[npcInfo.ID].x
+        npc.position.y = map.objects.NPC[npcInfo.ID].y
         npcInformation.startXY = [npc.position.x,npc.position.y];
-        if(npc.shouldWander === true) {
+        if(npcInfo.ShouldWander === true) {
             makeWander(npcInformation, true);
         } 
     }
