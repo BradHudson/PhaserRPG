@@ -11,6 +11,7 @@
     var npc;
     var currentStage = "Stage1";
     var npcInformation;
+    var whoWeTalkingToID;
     
     function preload() {
         loadAssetsByStage(currentStage);
@@ -18,6 +19,7 @@
     function create() {
         spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         actionKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+        npcJSONForCurrentStage = loadEnemyStats()[currentStage];
         game.world.setBounds(0, 0, 1920, 1920);
         addTileMapByStage(currentStage);
 		addLayersPlayerCollisions();
@@ -53,9 +55,8 @@
     }
 
     function handleNPCCollision() {
-        game.physics.arcade.collide(player, npcGroup, function(x,y){ npcCollisionHandler(x,y) });
+        game.physics.arcade.collide(player, npcGroup, function(player,n){ npcCollisionHandler(player,n) });
         if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
-            whoWeTalkingToID = 0;
             allowCollision = false;
             setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
@@ -70,8 +71,9 @@
         }
     }
 
-    function npcCollisionHandler(x,y,z) {
-        setVelocityZero(npc);
+    function npcCollisionHandler(player,n) {
+        whoWeTalkingToID = npcGroup.children.indexOf(n);
+        setVelocityZero(n);
     }
 
     function addLayersPlayerCollisions(){
@@ -107,7 +109,6 @@
     }
 
     function addNPC(){
-        npcJSONForCurrentStage = loadEnemyStats()[currentStage];
         npcGroup = game.add.group();
 
         //add enemy/NPC's
