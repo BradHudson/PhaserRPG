@@ -5,7 +5,7 @@
         "Health": 30,
         "SkillLevel": 1,
         "HaveFought": false,
-        "LoadImage": "assets/characters/adam/adam.png",
+        "LoadImage": "adam",
         "ImageSource": ["assets/characters/adam/adam.png", "assets/characters/adam/adam-back.png"],
         "ShouldWander": true,
         "ID": 0

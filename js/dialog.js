@@ -12,7 +12,7 @@ function startConversation(dialogArray) {
         indexOfDialog = 0;
         displayNextDialog(indexOfDialog);
         indexOfDialog = indexOfDialog + 1;
-    }
+}
 
 function blankDialog() {
     textOnScreen.text = "";
@@ -60,3 +60,4 @@ document.body.onkeyup = function(e){
             break;
      }
  }
+ 

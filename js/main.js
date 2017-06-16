@@ -53,9 +53,9 @@
     }
 
     function handleNPCCollision() {
-        game.physics.arcade.collide(player, npc, function(){ setVelocityZero(npc); });
+        game.physics.arcade.collide(player, npcGroup, function(x,y){ npcCollisionHandler(x,y) });
         if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
-            whoWeTalkingTo = "NPC1";
+            whoWeTalkingToID = 0;
             allowCollision = false;
             setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
@@ -64,10 +64,14 @@
                 startConversation(dialogArray);
                 if(stageOfNPCConversation === 1){
                     setTimeout(function(){
-                        fight('NPC',2,3)}, 1500);  
+                        fight(whoWeTalkingToID,2,3)}, 1500);  
                 }
             }
         }
+    }
+
+    function npcCollisionHandler(x,y,z) {
+        setVelocityZero(npc);
     }
 
     function addLayersPlayerCollisions(){
@@ -104,6 +108,8 @@
 
     function addNPC(){
         npcJSONForCurrentStage = loadEnemyStats()[currentStage];
+        npcGroup = game.add.group();
+
         //add enemy/NPC's
         for (var i = 0; i < npcJSONForCurrentStage.length; i++){
             createSprite(npcJSONForCurrentStage[i]);
@@ -111,12 +117,13 @@
     }
 
     function createSprite(npcInfo){
-        npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, npcInfo.LoadImage);
+        npc = npcGroup.create(game.world.centerX - 50, game.world.centerY - 50, npcInfo.LoadImage);
         npcInformation = new Enemy(currentStage, npcInfo.ID, npc);
         game.physics.enable(npc, Phaser.Physics.ARCADE);
         npc.body.immovable = true;
         npc.body.stopVelocityOnCollide = true;
         npc.body.collideWorldBounds = true;
+        npc.key = 'test';
         npc.position.x = map.objects.NPC[npcInfo.ID].x
         npc.position.y = map.objects.NPC[npcInfo.ID].y
         npcInformation.startXY = [npc.position.x,npc.position.y];

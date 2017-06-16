@@ -166,18 +166,3 @@ function endOfFight(){
     }
     inBattle = false;
 }
-
-
-$(document).ready(function() {
-//  $('#inventory').click(function() {
-//     fight();
-//   });
-//   window.onclick = function(event) {
-//     if (event.target === document.getElementsByClassName('modal')[0]) {
-      
-//     }
-//   };
-//   $('.close').click(function() {
-//     document.getElementsByClassName('modal')[0].style.display = 'none';
-//   });
-});
