@@ -15,3 +15,14 @@ function loadAssetsByStage(stage){
             break;
     }
 }
+
+function addTileMapByStage(stage){
+     switch(stage) {
+        case "Stage1":
+            map = game.add.tilemap('MyTilemap');
+            map.addTilesetImage('grass', 'grass');
+            map.addTilesetImage('tree', 'tree');
+            map.addTilesetImage('RED', 'red');
+            map.addTilesetImage('terrain-atlas', 'terrain-atlas');
+    }
+}

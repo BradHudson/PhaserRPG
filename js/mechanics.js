@@ -107,6 +107,14 @@ function makeWander(npcInfo, moveUp = true, goHome = false){
 	}
 }
 
+function preventDoubleCollision(){
+	allowCollision = true;
+}
+
+function actionKeyAndAllowCollision(){
+	return (actionKey.isDown && allowCollision === true)
+}
+
 function setVelocityZero(object){
 	object.body.velocity.x = 0; 
 	object.body.velocity.y = 0;

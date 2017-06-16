@@ -19,7 +19,7 @@
         spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         actionKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
         game.world.setBounds(0, 0, 1920, 1920);
-        addTileMap();
+        addTileMapByStage(currentStage);
 		addLayersPlayerCollisions();
         addNPC();
         addPlayerAnimations();
@@ -68,23 +68,6 @@
                 }
             }
         }
-    }
-
-    function preventDoubleCollision(){
-        allowCollision = true;
-    }
-
-    function actionKeyAndAllowCollision(){
-        return (actionKey.isDown && allowCollision === true)
-    }
-
-    function addTileMap(){
-        //add tilemap and tilesetimages
-        map = game.add.tilemap('MyTilemap');
-        map.addTilesetImage('grass', 'grass');
-        map.addTilesetImage('tree', 'tree');
-        map.addTilesetImage('RED', 'red');
-        map.addTilesetImage('terrain-atlas', 'terrain-atlas');
     }
 
     function addLayersPlayerCollisions(){
