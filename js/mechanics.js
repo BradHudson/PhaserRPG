@@ -57,6 +57,9 @@ function setKeys(){
 			player.animations.play('down');
 			playerWeapon.animations.play('down');
 			playerWeapon.anchor.setTo(.7, .3);
+			if(game.input.activePointer.leftButton.isDown){
+				performAnimation();
+			}
 			direction = "down";
 		} else {
 			player.animations.stop(null, true);
@@ -153,6 +156,12 @@ function weaponAnimations(){
 			playerWeapon.anchor.setTo(.3, .5);
 			playerWeapon.animations.play('swing-left');
 			playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('left'); playerWeapon.anchor.setTo(.7, .3); }, this);
+
+		}
+		if(game.input.activePointer.leftButton.isDown && direction === 'down'){
+			playerWeapon.anchor.setTo(.3, .1);
+			playerWeapon.animations.play('swing-down');
+			playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('down'); playerWeapon.anchor.setTo(.7, .3); }, this);
 
 		}
 

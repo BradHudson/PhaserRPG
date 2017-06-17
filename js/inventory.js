@@ -77,5 +77,5 @@ function addWeaponAnimations(weapon){
     // weapon.animations.add('up', [0], 10, true); //up appears on in back hide for now
     weapon.animations.add('swing-left', [0], 7, false);
     weapon.animations.add('swing-right', [3], 7, false);
-    //weapon.animations.add('swing-down', [3,4,3], 7, false); //cant swing down? idk
+    weapon.animations.add('swing-down', [5], 7, false); //cant swing down? idk
 }
