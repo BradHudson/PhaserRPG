@@ -4,6 +4,7 @@ var cursors;
 
 function setKeys(){
 	if(inBattle === false){
+		if(direction != 'up'){ playerWeapon.visible = true; }
 		if (cursors.left.isDown){
 			if(spaceKey.isDown)
 			{
@@ -13,6 +14,8 @@ function setKeys(){
 			}
 			player.body.velocity.x = speed
 			player.animations.play('left');
+			playerWeapon.animations.play('left');
+			playerWeapon.anchor.setTo(.7, .3);
 			direction = "left";
 		} else if (cursors.right.isDown){
 			if(spaceKey.isDown)
@@ -23,6 +26,8 @@ function setKeys(){
 			}
 			player.body.velocity.x = speed
 			player.animations.play('right');
+			playerWeapon.animations.play('right');
+			playerWeapon.anchor.setTo(-.1, .3);
 			direction = "right";
 		} else if (cursors.up.isDown) {
 			if(spaceKey.isDown)
@@ -34,6 +39,7 @@ function setKeys(){
 			player.body.velocity.y = speed
 			//player.body.moveUp(speed);
 			player.animations.play('up');
+			playerWeapon.visible = false;
 			direction = "up";
 		} else if (cursors.down.isDown) {
 			if(spaceKey.isDown)
@@ -45,6 +51,8 @@ function setKeys(){
 			player.body.velocity.y = speed
 			//player.body.moveDown(speed);
 			player.animations.play('down');
+			playerWeapon.animations.play('down');
+			playerWeapon.anchor.setTo(.7, .3);
 			direction = "down";
 		} else {
 			player.animations.stop(null, true);
@@ -102,7 +110,7 @@ function makeWander(npcInfo, moveUp = true, goHome = false){
 		if(moveUp === true){
 			npc.loadTexture('adam-back');
 		}else{npc.loadTexture('adam');}
-		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1],60,2000);
+		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1]);
 		setTimeout(function(){
 			setVelocityZero(object);
 			return makeWander(npcInfo, moveUp);

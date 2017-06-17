@@ -99,6 +99,7 @@
 		player.bringToTop();
         player.position.x = map.objects.StartPosition[0].x;
         player.position.y = map.objects.StartPosition[0].y;
+        equipWeapon(player, 'sword');
 
 		// add other layers
 		map.createLayer('Foreground');

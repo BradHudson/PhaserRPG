@@ -1,3 +1,5 @@
+var playerWeapon;
+
 function showInventory(){
     var inventory = document.getElementById('inventory-menu');
     if(inventory.style.display === 'none' || inventory.style.display === ''){
@@ -53,4 +55,22 @@ function weaponEquipped(){
 
 function getWeaponMoves(item){
     return weaponsProfile[item].Moves;
+}
+
+function chooseWeaponFromSheet(type){
+    return 0;
+}
+
+function equipWeapon(sprite, weaponType){
+    playerWeapon = new Phaser.Sprite(this.game, 10, 10, "weapons", chooseWeaponFromSheet(weaponType));
+    addWeaponAnimations(playerWeapon);
+    sprite.addChild(playerWeapon);
+}
+
+function addWeaponAnimations(weapon){
+    //animations for weapon
+    weapon.animations.add('down', [3], 10, true);
+    weapon.animations.add('left', [1], 10, true);
+    weapon.animations.add('right', [4], 10, true);
+    weapon.animations.add('up', [0], 10, true);
 }
