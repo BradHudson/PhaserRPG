@@ -1,3 +1,5 @@
+var playerWeapon;
+
 function showInventory(){
     var inventory = document.getElementById('inventory-menu');
     if(inventory.style.display === 'none' || inventory.style.display === ''){
@@ -53,4 +55,26 @@ function weaponEquipped(){
 
 function getWeaponMoves(item){
     return weaponsProfile[item].Moves;
+}
+
+function chooseWeaponFromSheet(type){
+    return weaponsProfile[type];
+}
+
+function equipWeapon(sprite, weaponType){
+    weaponReference = chooseWeaponFromSheet(weaponType);
+    playerWeapon = new Phaser.Sprite(this.game, 10, 10, "weapons", weaponReference.SpriteSheetFrames.Start);
+    addWeaponAnimations(playerWeapon);
+    sprite.addChild(playerWeapon);
+    playerWeapon.animations.play('down');
+	playerWeapon.anchor.setTo(.7, .3);
+}
+
+function addWeaponAnimations(weapon){
+    weapon.animations.add('down',[weaponReference.SpriteSheetFrames.Down], 10, true);
+    weapon.animations.add('left', [weaponReference.SpriteSheetFrames.Left], 10, true);
+    weapon.animations.add('right', [weaponReference.SpriteSheetFrames.Right], 10, true);
+    weapon.animations.add('swing-left', [weaponReference.SpriteSheetFrames.SwingLeft], 7, false);
+    weapon.animations.add('swing-right', [weaponReference.SpriteSheetFrames.SwingRight], 7, false);
+    weapon.animations.add('swing-down', [weaponReference.SpriteSheetFrames.SwingDown], 7, false); //cant swing down? idk
 }

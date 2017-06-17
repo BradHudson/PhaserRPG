@@ -14,5 +14,31 @@
             "Damage": 25
         }
     ]
+},
+"Axe":{
+    "ImageSource": "assets/weaponicons/limb.png",
+    "SpriteSheetFrames": {
+        "Start": 0,
+        "Down": 3,
+        "Left": 1,
+        "Right": 4,
+        "SwingRight": 3,
+        "SwingLeft": 0,
+        "SwingDown": 5
+    },
+    "Attack": 1,
+    "Defense": 1,
+    "Moves": [
+        {
+            "Name": "Strike",
+            "Chance": 90,
+            "Damage": 10
+        },
+        {
+            "Name": "Powerful Strike",
+            "Chance": 25,
+            "Damage": 25
+        }
+    ]
 }
 }

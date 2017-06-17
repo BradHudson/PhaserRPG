@@ -4,6 +4,7 @@ var cursors;
 
 function setKeys(){
 	if(inBattle === false){
+		if(direction != 'up'){ if(playerWeapon != undefined) { playerWeapon.visible = true; } }
 		if (cursors.left.isDown){
 			if(spaceKey.isDown)
 			{
@@ -13,6 +14,10 @@ function setKeys(){
 			}
 			player.body.velocity.x = speed
 			player.animations.play('left');
+			if(playerWeapon != undefined) { playerWeapon.animations.play('left'); playerWeapon.anchor.setTo(.7, .3); }
+			if(game.input.activePointer.leftButton.isDown){
+				performAnimation();
+			}
 			direction = "left";
 		} else if (cursors.right.isDown){
 			if(spaceKey.isDown)
@@ -23,6 +28,10 @@ function setKeys(){
 			}
 			player.body.velocity.x = speed
 			player.animations.play('right');
+			if(playerWeapon != undefined) { playerWeapon.animations.play('right'); playerWeapon.anchor.setTo(-.1, .3); }
+			if(game.input.activePointer.leftButton.isDown){
+				performAnimation();
+			}
 			direction = "right";
 		} else if (cursors.up.isDown) {
 			if(spaceKey.isDown)
@@ -32,8 +41,8 @@ function setKeys(){
 				speed = -300;
 			}
 			player.body.velocity.y = speed
-			//player.body.moveUp(speed);
 			player.animations.play('up');
+			if(playerWeapon != undefined) { playerWeapon.visible = false; }
 			direction = "up";
 		} else if (cursors.down.isDown) {
 			if(spaceKey.isDown)
@@ -43,8 +52,11 @@ function setKeys(){
 				speed = 300;
 			}
 			player.body.velocity.y = speed
-			//player.body.moveDown(speed);
 			player.animations.play('down');
+			if(playerWeapon != undefined) { playerWeapon.animations.play('down'); playerWeapon.anchor.setTo(.7, .3); }
+			if(game.input.activePointer.leftButton.isDown){
+				performAnimation();
+			}
 			direction = "down";
 		} else {
 			player.animations.stop(null, true);
@@ -58,6 +70,7 @@ function setKeys(){
 				player.frame = 1;
 			}
 		}
+		weaponAnimations();
 	} else{
 		resetPlayerVelocity();
 	}
@@ -102,7 +115,7 @@ function makeWander(npcInfo, moveUp = true, goHome = false){
 		if(moveUp === true){
 			npc.loadTexture('adam-back');
 		}else{npc.loadTexture('adam');}
-		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1],60,2000);
+		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1]);
 		setTimeout(function(){
 			setVelocityZero(object);
 			return makeWander(npcInfo, moveUp);
@@ -122,4 +135,31 @@ function actionKeyAndAllowCollision(){
 function setVelocityZero(object){
 	object.body.velocity.x = 0; 
 	object.body.velocity.y = 0;
+}
+
+function weaponAnimations(){
+	game.input.onDown.add(performAnimation, this);
+}
+
+function performAnimation() {
+	if(playerWeapon != undefined){
+	if(game.input.activePointer.leftButton.isDown && direction === 'right'){
+		playerWeapon.anchor.setTo(.5, .5);
+		playerWeapon.animations.play('swing-right');
+		playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('right'); playerWeapon.anchor.setTo(-.1, .3); }, this);
+		
+	}
+	if(game.input.activePointer.leftButton.isDown && direction === 'left'){
+		playerWeapon.anchor.setTo(.3, .5);
+		playerWeapon.animations.play('swing-left');
+		playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('left'); playerWeapon.anchor.setTo(.7, .3); }, this);
+
+	}
+	if(game.input.activePointer.leftButton.isDown && direction === 'down'){
+		playerWeapon.anchor.setTo(.3, .1);
+		playerWeapon.animations.play('swing-down');
+		playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('down'); playerWeapon.anchor.setTo(.7, .3); }, this);
+
+	}
+	}
 }
