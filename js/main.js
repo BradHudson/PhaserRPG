@@ -1,8 +1,5 @@
     var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update });
     var player;
-    var cursors;
-    var direction = "down";
-    var speed;
     var spaceKey;
     var actionKey
 	var collisionlayer;
@@ -10,22 +7,19 @@
     var bigTreeSprite;
     var npc;
     var currentStage = "Stage1";
+    var npcInformation;
+    var whoWeTalkingToID;
+    var npcInformatonJSON = { Stage1: [] };
     
     function preload() {
-        game.load.spritesheet('dude', 'assets/newguy.png', 30, 32);
-	    game.load.spritesheet('adam', 'assets/adam.png', 30, 32);
-        game.load.spritesheet('gus', 'assets/gus.png', 30, 32);
-        game.load.tilemap('MyTilemap', 'rpgmap.json', null, Phaser.Tilemap.TILED_JSON);
-        game.load.image('grass', 'assets/grass-tiles.png');
-        game.load.image('tree', 'assets/tree-tile.png');
-		game.load.image('red', 'assets/RED.png');
-        game.load.image('terrain-atlas', 'assets/terrain_atlas.png')
+        loadAssetsByStage(currentStage);
     }
     function create() {
         spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         actionKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+        npcJSONForCurrentStage = loadEnemyStats()[currentStage];
         game.world.setBounds(0, 0, 1920, 1920);
-        addTileMap();
+        addTileMapByStage(currentStage);
 		addLayersPlayerCollisions();
         addNPC();
         addPlayerAnimations();
@@ -59,38 +53,26 @@
     }
 
     function handleNPCCollision() {
-        game.physics.arcade.collide(player, npc);
+        game.physics.arcade.collide(player, npcGroup, function(player,n){ npcCollisionHandler(player,n) });
         if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
-            whoWeTalkingTo = "NPC1";
-            allowCollision = false;
+            allowCollision = false;// prevent double collision for half a second
             setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
-                dialogArray = conversationJSON.Level1["NPC"][stageOfNPCConversation];
+                whoWeTalkingTo = npcJSONForCurrentStage[whoWeTalkingToID].Name;
+                dialogArray = conversationJSON.Level1[whoWeTalkingTo][stageOfNPCConversation];
                 inQuest = true;
                 startConversation(dialogArray);
                 if(stageOfNPCConversation === 1){
                     setTimeout(function(){
-                        fight('NPC',2,3)}, 1500);  
+                        fight(whoWeTalkingToID,2,3)}, 1500);  
                 }
             }
         }
     }
 
-    function preventDoubleCollision(){
-        allowCollision = true;
-    }
-
-    function actionKeyAndAllowCollision(){
-        return (actionKey.isDown && allowCollision === true)
-    }
-
-    function addTileMap(){
-        //add tilemap and tilesetimages
-        map = game.add.tilemap('MyTilemap');
-        map.addTilesetImage('grass', 'grass');
-        map.addTilesetImage('tree', 'tree');
-        map.addTilesetImage('RED', 'red');
-        map.addTilesetImage('terrain-atlas', 'terrain-atlas');
+    function npcCollisionHandler(player,n) {
+        whoWeTalkingToID = npcGroup.children.indexOf(n);
+        setVelocityZero(n);
     }
 
     function addLayersPlayerCollisions(){
@@ -126,14 +108,28 @@
     }
 
     function addNPC(){
+        npcGroup = game.add.group();
+
         //add enemy/NPC's
-        npc = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50, 'adam');
+        for (var i = 0; i < npcJSONForCurrentStage.length; i++){
+            createSprite(npcJSONForCurrentStage[i]);
+        }
+    }
+
+    function createSprite(npcInfo){
+        npc = npcGroup.create(game.world.centerX - 50, game.world.centerY - 50, npcInfo.LoadImage);
+        npcInformation = new Enemy(currentStage, npcInfo.ID, npc);
         game.physics.enable(npc, Phaser.Physics.ARCADE);
         npc.body.immovable = true;
-        npc.body.moves =false;
+        npc.body.stopVelocityOnCollide = true;
         npc.body.collideWorldBounds = true;
-        npc.position.x = map.objects.NPC[0].x
-        npc.position.y = map.objects.NPC[0].y
+        npc.position.x = map.objects.NPC[npcInfo.ID].x
+        npc.position.y = map.objects.NPC[npcInfo.ID].y
+        npcInformation.startXY = [npc.position.x,npc.position.y];
+        if(npcInfo.ShouldWander === true) {
+            makeWander(npcInformation, true);
+        }
+        npcInformatonJSON[currentStage].push(npcInformation); 
     }
 
     function ensureBigTreeSize() {

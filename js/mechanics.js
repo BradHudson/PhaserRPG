@@ -1,3 +1,7 @@
+var direction = "down";
+var speed;
+var cursors;
+
 function setKeys(){
 	if(inBattle === false){
 		if (cursors.left.isDown){
@@ -72,4 +76,50 @@ function addPlayerAnimations() {
     player.animations.add('right', [6, 7,8], 10, true);
     player.animations.add('up', [9, 10, 11], 10, true);
     cursors = game.input.keyboard.createCursorKeys();
+}
+
+//USE THIS npc.body.moveTo(3000, 100, 270); up
+//npc.body.moveTo(3000, 100, 90); down
+
+function makeWander(npcInfo, moveUp = true, goHome = false){
+	var object = npcInfo.object;
+	if(inConversation === true){
+		setTimeout(function(){ return makeWander(npcInfo, moveUp) }, 1000);
+	}else{
+	if(goHome === false){
+		if(moveUp === true){
+			game.physics.arcade.moveToXY(object, object.position.x, object.position.y - 10);
+			npc.loadTexture('adam-back');
+		}else { 
+			game.physics.arcade.moveToXY(object, object.position.x, object.position.y + 10); 
+			npc.loadTexture('adam');
+		}
+		setTimeout(function(){
+			setVelocityZero(object);
+			return makeWander(npcInfo, !moveUp, true);
+		}, 2000);
+	} else{ //return to start position
+		if(moveUp === true){
+			npc.loadTexture('adam-back');
+		}else{npc.loadTexture('adam');}
+		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1],60,2000);
+		setTimeout(function(){
+			setVelocityZero(object);
+			return makeWander(npcInfo, moveUp);
+		}, 2000);
+	}
+	}
+}
+
+function preventDoubleCollision(){
+	allowCollision = true;
+}
+
+function actionKeyAndAllowCollision(){
+	return (actionKey.isDown && allowCollision === true)
+}
+
+function setVelocityZero(object){
+	object.body.velocity.x = 0; 
+	object.body.velocity.y = 0;
 }

@@ -1,12 +1,17 @@
 var inQuest = false;
 
-function Enemy(stage, enemyID){
+function Enemy(stage, enemyID, object = ''){
     enemyJSON = loadEnemyStats()[stage][enemyID];
+    this.name = enemyJSON.Name;
     this.skillLevel = enemyJSON.SkillLevel;
     this.enemyHealth = enemyJSON.Health;
     this.enemyWeapon = enemyJSON.Weapon;
     this.enemyHaveFought= enemyJSON.HaveFought;
-    this.enemyImage = enemyJSON.ImageSource;
+    this.enemyImage = enemyJSON.ImageSource[0];
+    this.shouldWander = enemyJSON.ShouldWander;
+    this.startXY = [];
+    this.object = object;
+    this.stageOfConversation = 0;
 }
 
 function saveEnemyData(){
@@ -18,4 +23,8 @@ function saveEnemyData(){
    request.open("GET", "gameData/enemy.json", false);
    request.send(null);
    return JSON.parse(request.responseText);
+ }
+
+ function listStageEnemies() {
+     loadEnemyStats()[currentStage];
  }

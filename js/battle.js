@@ -19,7 +19,7 @@ var playerWon;
 
 function fight(enemy,winningIndex,losingIndex){
     npcProfile = new Enemy(currentStage, enemy);
-    currentEnemy = enemy;
+    currentEnemy = npcProfile.name;
     winningConvoIndex = winningIndex;
     losingConvoIndex = losingIndex;
     resetPlayerVelocity();
@@ -166,18 +166,3 @@ function endOfFight(){
     }
     inBattle = false;
 }
-
-
-$(document).ready(function() {
-//  $('#inventory').click(function() {
-//     fight();
-//   });
-//   window.onclick = function(event) {
-//     if (event.target === document.getElementsByClassName('modal')[0]) {
-      
-//     }
-//   };
-//   $('.close').click(function() {
-//     document.getElementsByClassName('modal')[0].style.display = 'none';
-//   });
-});

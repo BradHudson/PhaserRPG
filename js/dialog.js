@@ -12,7 +12,7 @@ function startConversation(dialogArray) {
         indexOfDialog = 0;
         displayNextDialog(indexOfDialog);
         indexOfDialog = indexOfDialog + 1;
-    }
+}
 
 function blankDialog() {
     textOnScreen.text = "";
@@ -52,7 +52,7 @@ document.body.onkeyup = function(e){
 
  function updateStageOfConversation(whoWeTalkingTo){
      switch(whoWeTalkingTo){
-         case "NPC1":
+         case "AdamNPC":
             stageOfNPCConversation = stageOfNPCConversation + 1;
             break;
          case "BigTree":
@@ -60,3 +60,4 @@ document.body.onkeyup = function(e){
             break;
      }
  }
+ 

@@ -1,10 +1,13 @@
-{ "Stage1": {
-    "NPC": {
+{ "Stage1": [
+     {
+        "Name": "AdamNPC",
         "Weapon": "Limb",
         "Health": 30,
         "SkillLevel": 1,
         "HaveFought": false,
-        "ImageSource": "assets/adam.png"
-    }
-}
+        "LoadImage": "adam",
+        "ImageSource": ["assets/characters/adam/adam.png", "assets/characters/adam/adam-back.png"],
+        "ShouldWander": true,
+        "ID": 0
+    }]
 }
