@@ -71,12 +71,9 @@ function equipWeapon(sprite, weaponType){
 }
 
 function addWeaponAnimations(weapon){
-    //animations for weapon
-    //findWeaponAnimationFrames(); // lookup weapon, find weapon frames
     weapon.animations.add('down',[weaponReference.SpriteSheetFrames.Down], 10, true);
     weapon.animations.add('left', [weaponReference.SpriteSheetFrames.Left], 10, true);
     weapon.animations.add('right', [weaponReference.SpriteSheetFrames.Right], 10, true);
-    // weapon.animations.add('up', [0], 10, true); //up appears on in back hide for now
     weapon.animations.add('swing-left', [weaponReference.SpriteSheetFrames.SwingLeft], 7, false);
     weapon.animations.add('swing-right', [weaponReference.SpriteSheetFrames.SwingRight], 7, false);
     weapon.animations.add('swing-down', [weaponReference.SpriteSheetFrames.SwingDown], 7, false); //cant swing down? idk
