@@ -58,11 +58,12 @@ function getWeaponMoves(item){
 }
 
 function chooseWeaponFromSheet(type){
-    return 0;
+    return weaponsProfile[type];
 }
 
 function equipWeapon(sprite, weaponType){
-    playerWeapon = new Phaser.Sprite(this.game, 10, 10, "weapons", chooseWeaponFromSheet(weaponType));
+    weaponReference = chooseWeaponFromSheet(weaponType);
+    playerWeapon = new Phaser.Sprite(this.game, 10, 10, "weapons", weaponReference.SpriteSheetFrames.Start);
     addWeaponAnimations(playerWeapon);
     sprite.addChild(playerWeapon);
     playerWeapon.animations.play('down');
@@ -71,11 +72,12 @@ function equipWeapon(sprite, weaponType){
 
 function addWeaponAnimations(weapon){
     //animations for weapon
-    weapon.animations.add('down', [3], 10, true);
-    weapon.animations.add('left', [1], 10, true);
-    weapon.animations.add('right', [4], 10, true);
+    //findWeaponAnimationFrames(); // lookup weapon, find weapon frames
+    weapon.animations.add('down',[weaponReference.SpriteSheetFrames.Down], 10, true);
+    weapon.animations.add('left', [weaponReference.SpriteSheetFrames.Left], 10, true);
+    weapon.animations.add('right', [weaponReference.SpriteSheetFrames.Right], 10, true);
     // weapon.animations.add('up', [0], 10, true); //up appears on in back hide for now
-    weapon.animations.add('swing-left', [0], 7, false);
-    weapon.animations.add('swing-right', [3], 7, false);
-    weapon.animations.add('swing-down', [5], 7, false); //cant swing down? idk
+    weapon.animations.add('swing-left', [weaponReference.SpriteSheetFrames.SwingLeft], 7, false);
+    weapon.animations.add('swing-right', [weaponReference.SpriteSheetFrames.SwingRight], 7, false);
+    weapon.animations.add('swing-down', [weaponReference.SpriteSheetFrames.SwingDown], 7, false); //cant swing down? idk
 }
