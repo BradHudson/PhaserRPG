@@ -58,13 +58,15 @@ function getWeaponMoves(item){
 }
 
 function chooseWeaponFromSheet(type){
-    return 0;
+    return 1;
 }
 
 function equipWeapon(sprite, weaponType){
     playerWeapon = new Phaser.Sprite(this.game, 10, 10, "weapons", chooseWeaponFromSheet(weaponType));
     addWeaponAnimations(playerWeapon);
     sprite.addChild(playerWeapon);
+    playerWeapon.animations.play('down');
+	playerWeapon.anchor.setTo(.7, .3);
 }
 
 function addWeaponAnimations(weapon){
@@ -72,5 +74,8 @@ function addWeaponAnimations(weapon){
     weapon.animations.add('down', [3], 10, true);
     weapon.animations.add('left', [1], 10, true);
     weapon.animations.add('right', [4], 10, true);
-    weapon.animations.add('up', [0], 10, true);
+    // weapon.animations.add('up', [0], 10, true); //up appears on in back hide for now
+    weapon.animations.add('swing-left', [0,1], 7, false);
+    weapon.animations.add('swing-right', [3,4], 7, false);
+    // weapon.animations.add('swing-down', [0], 10, true); //cant swing down? idk
 }

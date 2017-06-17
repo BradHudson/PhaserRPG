@@ -23,6 +23,7 @@
 		addLayersPlayerCollisions();
         addNPC();
         addPlayerAnimations();
+        weaponAnimations();
         addTextOnScreen();
     }
 

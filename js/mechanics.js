@@ -16,6 +16,9 @@ function setKeys(){
 			player.animations.play('left');
 			playerWeapon.animations.play('left');
 			playerWeapon.anchor.setTo(.7, .3);
+			if(game.input.activePointer.leftButton.isDown){
+				playerWeapon.animations.play('swing-left');
+			}
 			direction = "left";
 		} else if (cursors.right.isDown){
 			if(spaceKey.isDown)
@@ -27,6 +30,9 @@ function setKeys(){
 			player.body.velocity.x = speed
 			player.animations.play('right');
 			playerWeapon.animations.play('right');
+			if(game.input.activePointer.leftButton.isDown){
+				playerWeapon.animations.play('swing-right');
+			}
 			playerWeapon.anchor.setTo(-.1, .3);
 			direction = "right";
 		} else if (cursors.up.isDown) {
@@ -131,3 +137,18 @@ function setVelocityZero(object){
 	object.body.velocity.x = 0; 
 	object.body.velocity.y = 0;
 }
+
+function weaponAnimations(){
+	game.input.onDown.add(performAnimation, this);
+}
+
+	function performAnimation() {
+
+		if(game.input.activePointer.leftButton.isDown && direction === 'right'){
+			playerWeapon.animations.play('swing-right');
+		}
+		if(game.input.activePointer.leftButton.isDown && direction === 'left'){
+			playerWeapon.animations.play('swing-left');
+		}
+
+	}
