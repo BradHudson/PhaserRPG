@@ -4,7 +4,7 @@ var cursors;
 
 function setKeys(){
 	if(inBattle === false){
-		if(direction != 'up'){ playerWeapon.visible = true; }
+		if(direction != 'up'){ if(playerWeapon != undefined) { playerWeapon.visible = true; } }
 		if (cursors.left.isDown){
 			if(spaceKey.isDown)
 			{
@@ -14,8 +14,7 @@ function setKeys(){
 			}
 			player.body.velocity.x = speed
 			player.animations.play('left');
-			playerWeapon.animations.play('left');
-			playerWeapon.anchor.setTo(.7, .3);
+			if(playerWeapon != undefined) { playerWeapon.animations.play('left'); playerWeapon.anchor.setTo(.7, .3); }
 			if(game.input.activePointer.leftButton.isDown){
 				performAnimation();
 			}
@@ -29,8 +28,7 @@ function setKeys(){
 			}
 			player.body.velocity.x = speed
 			player.animations.play('right');
-			playerWeapon.animations.play('right');
-			playerWeapon.anchor.setTo(-.1, .3);
+			if(playerWeapon != undefined) { playerWeapon.animations.play('right'); playerWeapon.anchor.setTo(-.1, .3); }
 			if(game.input.activePointer.leftButton.isDown){
 				performAnimation();
 			}
@@ -44,7 +42,7 @@ function setKeys(){
 			}
 			player.body.velocity.y = speed
 			player.animations.play('up');
-			playerWeapon.visible = false;
+			if(playerWeapon != undefined) { playerWeapon.visible = false; }
 			direction = "up";
 		} else if (cursors.down.isDown) {
 			if(spaceKey.isDown)
@@ -55,8 +53,7 @@ function setKeys(){
 			}
 			player.body.velocity.y = speed
 			player.animations.play('down');
-			playerWeapon.animations.play('down');
-			playerWeapon.anchor.setTo(.7, .3);
+			if(playerWeapon != undefined) { playerWeapon.animations.play('down'); playerWeapon.anchor.setTo(.7, .3); }
 			if(game.input.activePointer.leftButton.isDown){
 				performAnimation();
 			}
@@ -144,25 +141,25 @@ function weaponAnimations(){
 	game.input.onDown.add(performAnimation, this);
 }
 
-	function performAnimation() {
-		// animationReference = playerWeapon.animations.animationReference.isPlaying
-		if(game.input.activePointer.leftButton.isDown && direction === 'right'){
-			playerWeapon.anchor.setTo(.5, .5);
-			playerWeapon.animations.play('swing-right');
-			playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('right'); playerWeapon.anchor.setTo(-.1, .3); }, this);
-			
-		}
-		if(game.input.activePointer.leftButton.isDown && direction === 'left'){
-			playerWeapon.anchor.setTo(.3, .5);
-			playerWeapon.animations.play('swing-left');
-			playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('left'); playerWeapon.anchor.setTo(.7, .3); }, this);
-
-		}
-		if(game.input.activePointer.leftButton.isDown && direction === 'down'){
-			playerWeapon.anchor.setTo(.3, .1);
-			playerWeapon.animations.play('swing-down');
-			playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('down'); playerWeapon.anchor.setTo(.7, .3); }, this);
-
-		}
+function performAnimation() {
+	if(playerWeapon != undefined){
+	if(game.input.activePointer.leftButton.isDown && direction === 'right'){
+		playerWeapon.anchor.setTo(.5, .5);
+		playerWeapon.animations.play('swing-right');
+		playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('right'); playerWeapon.anchor.setTo(-.1, .3); }, this);
+		
+	}
+	if(game.input.activePointer.leftButton.isDown && direction === 'left'){
+		playerWeapon.anchor.setTo(.3, .5);
+		playerWeapon.animations.play('swing-left');
+		playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('left'); playerWeapon.anchor.setTo(.7, .3); }, this);
 
 	}
+	if(game.input.activePointer.leftButton.isDown && direction === 'down'){
+		playerWeapon.anchor.setTo(.3, .1);
+		playerWeapon.animations.play('swing-down');
+		playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('down'); playerWeapon.anchor.setTo(.7, .3); }, this);
+
+	}
+	}
+}
