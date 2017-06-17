@@ -1,6 +1,6 @@
 var inQuest = false;
 
-function Enemy(stage, enemyID, object = nil){
+function Enemy(stage, enemyID, object = ''){
     enemyJSON = loadEnemyStats()[stage][enemyID];
     this.name = enemyJSON.Name;
     this.skillLevel = enemyJSON.SkillLevel;
@@ -11,6 +11,7 @@ function Enemy(stage, enemyID, object = nil){
     this.shouldWander = enemyJSON.ShouldWander;
     this.startXY = [];
     this.object = object;
+    this.stageOfConversation = 0;
 }
 
 function saveEnemyData(){

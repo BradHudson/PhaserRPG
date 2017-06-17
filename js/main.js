@@ -1,8 +1,5 @@
     var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update });
     var player;
-    var cursors;
-    var direction = "down";
-    var speed;
     var spaceKey;
     var actionKey
 	var collisionlayer;
@@ -12,6 +9,7 @@
     var currentStage = "Stage1";
     var npcInformation;
     var whoWeTalkingToID;
+    var npcInformatonJSON = { Stage1: [] };
     
     function preload() {
         loadAssetsByStage(currentStage);
@@ -57,10 +55,11 @@
     function handleNPCCollision() {
         game.physics.arcade.collide(player, npcGroup, function(player,n){ npcCollisionHandler(player,n) });
         if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
-            allowCollision = false;
+            allowCollision = false;// prevent double collision for half a second
             setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
-                dialogArray = conversationJSON.Level1["NPC"][stageOfNPCConversation];
+                whoWeTalkingTo = npcJSONForCurrentStage[whoWeTalkingToID].Name;
+                dialogArray = conversationJSON.Level1[whoWeTalkingTo][stageOfNPCConversation];
                 inQuest = true;
                 startConversation(dialogArray);
                 if(stageOfNPCConversation === 1){
@@ -124,13 +123,13 @@
         npc.body.immovable = true;
         npc.body.stopVelocityOnCollide = true;
         npc.body.collideWorldBounds = true;
-        npc.key = 'test';
         npc.position.x = map.objects.NPC[npcInfo.ID].x
         npc.position.y = map.objects.NPC[npcInfo.ID].y
         npcInformation.startXY = [npc.position.x,npc.position.y];
         if(npcInfo.ShouldWander === true) {
             makeWander(npcInformation, true);
-        } 
+        }
+        npcInformatonJSON[currentStage].push(npcInformation); 
     }
 
     function ensureBigTreeSize() {

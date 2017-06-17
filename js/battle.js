@@ -19,7 +19,7 @@ var playerWon;
 
 function fight(enemy,winningIndex,losingIndex){
     npcProfile = new Enemy(currentStage, enemy);
-    currentEnemy = enemy;
+    currentEnemy = npcProfile.name;
     winningConvoIndex = winningIndex;
     losingConvoIndex = losingIndex;
     resetPlayerVelocity();

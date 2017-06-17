@@ -1,3 +1,7 @@
+var direction = "down";
+var speed;
+var cursors;
+
 function setKeys(){
 	if(inBattle === false){
 		if (cursors.left.isDown){
