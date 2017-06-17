@@ -17,7 +17,7 @@ function setKeys(){
 			playerWeapon.animations.play('left');
 			playerWeapon.anchor.setTo(.7, .3);
 			if(game.input.activePointer.leftButton.isDown){
-				playerWeapon.animations.play('swing-left');
+				performAnimation();
 			}
 			direction = "left";
 		} else if (cursors.right.isDown){
@@ -30,10 +30,10 @@ function setKeys(){
 			player.body.velocity.x = speed
 			player.animations.play('right');
 			playerWeapon.animations.play('right');
-			if(game.input.activePointer.leftButton.isDown){
-				playerWeapon.animations.play('swing-right');
-			}
 			playerWeapon.anchor.setTo(-.1, .3);
+			if(game.input.activePointer.leftButton.isDown){
+				performAnimation();
+			}
 			direction = "right";
 		} else if (cursors.up.isDown) {
 			if(spaceKey.isDown)
@@ -43,7 +43,6 @@ function setKeys(){
 				speed = -300;
 			}
 			player.body.velocity.y = speed
-			//player.body.moveUp(speed);
 			player.animations.play('up');
 			playerWeapon.visible = false;
 			direction = "up";
@@ -55,7 +54,6 @@ function setKeys(){
 				speed = 300;
 			}
 			player.body.velocity.y = speed
-			//player.body.moveDown(speed);
 			player.animations.play('down');
 			playerWeapon.animations.play('down');
 			playerWeapon.anchor.setTo(.7, .3);
@@ -72,6 +70,7 @@ function setKeys(){
 				player.frame = 1;
 			}
 		}
+		weaponAnimations();
 	} else{
 		resetPlayerVelocity();
 	}
@@ -143,12 +142,18 @@ function weaponAnimations(){
 }
 
 	function performAnimation() {
-
+		// animationReference = playerWeapon.animations.animationReference.isPlaying
 		if(game.input.activePointer.leftButton.isDown && direction === 'right'){
+			playerWeapon.anchor.setTo(.5, .5);
 			playerWeapon.animations.play('swing-right');
+			playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('right'); playerWeapon.anchor.setTo(-.1, .3); }, this);
+			
 		}
 		if(game.input.activePointer.leftButton.isDown && direction === 'left'){
+			playerWeapon.anchor.setTo(.3, .5);
 			playerWeapon.animations.play('swing-left');
+			playerWeapon.animations.currentAnim.onComplete.add(function () { playerWeapon.animations.play('left'); playerWeapon.anchor.setTo(.7, .3); }, this);
+
 		}
 
 	}
