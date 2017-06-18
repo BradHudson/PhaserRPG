@@ -54,7 +54,7 @@
 
     function handleNPCCollision() {
         game.physics.arcade.collide(player, npcGroup, function(player,n){ npcCollisionHandler(player,n) });
-        if(Phaser.Rectangle.intersects(player.getBounds(), npc.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
+        if(Phaser.Rectangle.intersects(player.getBounds(), npcGroup.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
             allowCollision = false;// prevent double collision for half a second
             setTimeout(preventDoubleCollision(), 500)
             if(inConversation === false){
@@ -64,7 +64,7 @@
                 startConversation(dialogArray, npcGroup.children[whoWeTalkingToID]);
                 if(stageOfNPCConversation === 1){
                     setTimeout(function(){
-                        fight(whoWeTalkingToID,2,3)}, 1500);  
+                        fight(whoWeTalkingToID,2,3,npcGroup.children[whoWeTalkingToID])}, 1500);  
                 }
             }
         }
