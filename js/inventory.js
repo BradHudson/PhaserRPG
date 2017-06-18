@@ -42,6 +42,7 @@ function selectOnlyThis() {
 }
 
 function updateWeaponEquipped(item){
+    equipWeapon(player, item.id);
     var weaponImage = document.getElementById('weapon-image');
     weaponImage.style.display = 'block';
     weaponImage.src = weaponsProfile[item.name].ImageSource;
@@ -63,7 +64,12 @@ function chooseWeaponFromSheet(type){
 
 function equipWeapon(sprite, weaponType){
     weaponReference = chooseWeaponFromSheet(weaponType);
-    playerWeapon = new Phaser.Sprite(this.game, 10, 10, "weapons", weaponReference.SpriteSheetFrames.Start);
+    if(weaponType === 'Limb') {
+        playerWeapon = new Phaser.Sprite(this.game, 10, 10, "limb", weaponReference.SpriteSheetFrames.Start);
+        playerWeapon.scale.setTo(1.3,1.3);
+    }else{
+        playerWeapon = new Phaser.Sprite(this.game, 10, 10, "weapons", weaponReference.SpriteSheetFrames.Start);
+    }
     addWeaponAnimations(playerWeapon);
     sprite.addChild(playerWeapon);
     playerWeapon.animations.play('down');

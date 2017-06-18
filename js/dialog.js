@@ -6,11 +6,16 @@ var textOnScreen;
 var whoWeTalkingTo = '';
 var stageOfNPCConversation = 0;
 var stageOfTreeConversation = 0;
+var speechBubble;
+var spriteSpeaking;
+var displayAsBottomText;
 
-function startConversation(dialogArray) {
+function startConversation(dialogArray, sprite, bottomText = false) {
         inConversation = true;
         indexOfDialog = 0;
-        displayNextDialog(indexOfDialog);
+        displayAsBottomText = bottomText;
+        spriteSpeaking = sprite;
+        displayNextDialog(indexOfDialog, sprite);
         indexOfDialog = indexOfDialog + 1;
 }
 
@@ -18,20 +23,26 @@ function blankDialog() {
     textOnScreen.text = "";
 }
 
-function displayNextDialog(){
-    textOnScreen.text = dialogArray[indexOfDialog];
+function displayNextDialog(index,sprite){
+    if(speechBubble != undefined){ speechBubble.destroy(); }
+    if(displayAsBottomText === true) {
+        textOnScreen.text = dialogArray[indexOfDialog];
+    }else{
+        speechBubble = new SpeechText(game, sprite.position.x, sprite.position.y, 50, -40, dialogArray[index], 5000, sprite, function(){}, this);
+    }
 }
 
 document.body.onkeyup = function(e){
     if(e.keyCode == 32 && inConversation){
         if(indexOfDialog === dialogArray.length){
+            speechBubble.destroy();
             textOnScreen.text = "";
             inConversation = false;
             indexOfDialog = 0;
             updateStageOfConversation(whoWeTalkingTo);
             whoWeTalkingTo = "";
         }else{
-        displayNextDialog();
+        displayNextDialog(indexOfDialog, spriteSpeaking);
         indexOfDialog = indexOfDialog + 1;
         }
     }

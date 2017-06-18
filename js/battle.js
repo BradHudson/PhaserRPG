@@ -17,8 +17,8 @@ var enemyMove2;
 var whosTurn = 'Player';
 var playerWon;
 
-function fight(enemy,winningIndex,losingIndex){
-    npcProfile = new Enemy(currentStage, enemy);
+function fight(enemy,winningIndex,losingIndex,sprite){
+    npcProfile = new Enemy(currentStage, enemy,sprite);
     currentEnemy = npcProfile.name;
     winningConvoIndex = winningIndex;
     losingConvoIndex = losingIndex;
@@ -159,10 +159,10 @@ function endOfFight(){
     document.getElementsByClassName('modal')[0].style.display = 'none';
     if(playerWon === true){
         dialogArray = conversationJSON.Level1[currentEnemy][winningConvoIndex];
-        startConversation(dialogArray);
+        startConversation(dialogArray, npcProfile.object);
     }else{
         dialogArray = conversationJSON.Level1[currentEnemy][losingConvoIndex];
-        startConversation(dialogArray);
+        startConversation(dialogArray, npcProfile.object);
     }
     inBattle = false;
 }
