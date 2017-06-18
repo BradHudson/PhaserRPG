@@ -102,7 +102,7 @@
         // var speech2 = new Array();
         // speech2.push(new Array('We chase misprinted lies', 'We face the path of time', 'And yet I fight', 'This battle all alone', 'No one to cry to', 'No place to call home', 'Oooh...Oooh...', 'My gift of self is raped', 'My privacy is raked','And yet I find','Repeating in my head'));
         // test1 = new SpeechText(game, player.position.x, player.position.y, 50, -40, speech2, 5000, this.elem, function(){}, this);
-        // equipWeapon(player, 'Axe'); //wanna see him hold the axe? click to swing
+        //equipWeapon(player, 'Axe'); //wanna see him hold the axe? click to swing
 
 		// add other layers
 		map.createLayer('Foreground');
