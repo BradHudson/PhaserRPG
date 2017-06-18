@@ -13,6 +13,8 @@ function loadAssetsByStage(stage){
             game.load.image('tree', 'assets/tree-tile.png');
             game.load.image('red', 'assets/RED.png');
             game.load.image('terrain-atlas', 'assets/terrain_atlas.png')
+            game.load.image('speech_part', 'assets/speech_part.png');
+            game.load.image('pop', 'assets/pop.png');
             break;
     }
 }
