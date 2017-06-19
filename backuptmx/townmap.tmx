@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" source="../../../../Desktop/grassrpg.json"/>
+ <tileset firstgid="73" source="../townTiles2.json"/>
+ <layer name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0bENwDAQw8Bfyenj/ceKtyBjsBDY69bMPGfr533P9gWlf8wjD3PpH/PIw1z6xzzyMJf+MY88zKV/zCMPc+kf88jDXPrHPPIwl/4xjzzMpX/MIw9z6R/zyMNc+sc88jCX/jGPPMz9AKofHh0=
+  </data>
+ </layer>
+ <layer name="Foreground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0dEJwjAURuEbu4UbVCdonc7WBdQuUOgCgoupC/TPe6rJQ0iE88Gh9yFcUmIGAAAAAAAAAAAAAKjdWQ1qDHwvBe+V6qpu6h74TgXv5b3VR70i5vnLniVyR47Zt3NmjXLu9/zQ+b0L97S4HTlmX4pW5w8bHRN3ldTprv1Gpz/6D96jLrxHXXiP/Faao0Dr
+  </data>
+ </layer>
+ <layer name="Treetop" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
+  </data>
+ </layer>
+ <layer name="Collisions" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
+  </data>
+ </layer>
+</map>
