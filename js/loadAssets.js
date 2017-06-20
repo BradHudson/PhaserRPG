@@ -25,19 +25,19 @@ function loadAssetsByStage(stage){
 
 function addTileMapByStage(stage){
      switch(stage) {
+        // case "Stage1":
+        //     map = game.add.tilemap('MyTilemap');
+        //     map.addTilesetImage('grass', 'grass');
+        //     map.addTilesetImage('tree', 'tree');
+        //     map.addTilesetImage('RED', 'red');
+        //     map.addTilesetImage('terrain-atlas', 'terrain-atlas');
         case "Stage1":
-            map = game.add.tilemap('MyTilemap');
-            map.addTilesetImage('grass', 'grass');
-            map.addTilesetImage('tree', 'tree');
-            map.addTilesetImage('RED', 'red');
-            map.addTilesetImage('terrain-atlas', 'terrain-atlas');
-        case "Town":
             map = game.add.tilemap('TownMap');
             map.addTilesetImage('grass', 'grass');
-            map.addTilesetImage('tree', 'tree');
+            // map.addTilesetImage('tree', 'tree');
             map.addTilesetImage('RED', 'red');
             map.addTilesetImage('terrain-atlas', 'terrain-atlas');
             map.addTilesetImage('townTiles1', 'townTiles1');
-            map.addTilesetImage('townTiles2', 'townTiles1');
+            // map.addTilesetImage('townTiles2', 'townTiles1');
     }
 }
