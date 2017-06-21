@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="15">
- <tileset firstgid="1" source="../../../Desktop/grassrpg.json"/>
- <tileset firstgid="73" source="../../../Desktop/treerpg.json"/>
- <tileset firstgid="137" source="../../../Desktop/RED.json"/>
- <tileset firstgid="138" source="../../../Desktop/terrain-atlas.json"/>
+ <tileset firstgid="1" source="../../../../Desktop/grassrpg.json"/>
+ <tileset firstgid="73" source="../../../../Desktop/treerpg.json"/>
+ <tileset firstgid="137" source="../../../../Desktop/RED.json"/>
+ <tileset firstgid="138" source="../../../../Desktop/terrain-atlas.json"/>
  <layer name="Background" width="50" height="50">
   <data encoding="csv">
 1,2,3,4,5,6,7,8,9,10,1,2,7,7,7,7,7,1,2,3,3,3,3,3,3,1,1,1,1,1,2,3,4,4,5,6,7,8,9,818,819,820,3,4,5,6,7,8,9,10,

@@ -63,30 +63,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":62.6666666666667,
-                 "x":969.333333333333,
-                 "y":501.333333333333
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "name":"ExitToTown",
-         "objects":[
-                {
-                 "height":59,
-                 "id":11,
-                 "name":"ExitToTown",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":91,
-                 "x":1250,
-                 "y":3
+                 "width":62.6667,
+                 "x":969.333,
+                 "y":501.333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -99,15 +78,15 @@
          "name":"NPC",
          "objects":[
                 {
-                 "height":65.3333333333334,
+                 "height":65.3333,
                  "id":10,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":73.3333333333333,
+                 "width":73.3333,
                  "x":1256,
-                 "y":430.666666666667
+                 "y":430.667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -120,15 +99,36 @@
          "name":"BigTree",
          "objects":[
                 {
-                 "height":177.333333333333,
+                 "height":177.333,
                  "id":11,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":205.333333333333,
-                 "x":769.333333333333,
-                 "y":253.333333333333
+                 "width":205.333,
+                 "x":769.333,
+                 "y":253.333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"ExitToTown",
+         "objects":[
+                {
+                 "height":60,
+                 "id":14,
+                 "name":"ExitToTown",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96,
+                 "x":1249.33333333333,
+                 "y":5.33333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -136,9 +136,10 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":14,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
+ "tiledversion":"1.0.1",
  "tileheight":32,
  "tilesets":[
         {
@@ -235,6 +236,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.0.0",
+ "version":1,
  "width":50
 }

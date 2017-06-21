@@ -68,6 +68,15 @@
             addWeaponToInventory('Limb');
             inQuest = false;
         }
+        if(Phaser.Rectangle.intersects(player.getBounds(), exitToTownSprite.getBounds())){
+            whoWeTalkingTo = "BigTree";
+            allowCollision = false;
+            setTimeout(preventDoubleCollision(), 500)
+            dialogArray = conversationJSON.Level1["BigTree"];
+            startConversation(dialogArray,bigTreeSprite,true);
+            addWeaponToInventory('Limb');
+            inQuest = false;
+        }
     }
 
     function handleNPCCollision() {
@@ -101,7 +110,7 @@
 		//BASE LAYER
         layer = map.createLayer('Background');
 		
-        //INVISIBLE WALL 
+        //INVISIBLE WALL BIG TREE
         bigTreeSprite = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50);
         bigTreeSprite.scale.setTo(7, 7);
         bigTreeSprite.position.x = map.objects.BigTree[0].x + 20;
@@ -109,6 +118,15 @@
         game.physics.enable(bigTreeSprite, Phaser.Physics.ARCADE);
         bigTreeSprite.body.immovable = true;
         bigTreeSprite.body.collideWorldBounds = true;
+
+        //INVISIBLE WALL EXIT TO TOWN
+        exitToTownSprite = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50);
+        exitToTownSprite.scale.setTo(4, 4);
+        exitToTownSprite.position.x = map.objects.ExitToTown[0].x;
+        exitToTownSprite.position.y = map.objects.ExitToTown[0].y;
+        game.physics.enable(exitToTownSprite, Phaser.Physics.ARCADE);
+        exitToTownSprite.body.immovable = true;
+        exitToTownSprite.body.collideWorldBounds = true;
 
         //LOAD THE PLAYER
 		player = game.add.sprite(800, 400, 'dude');
