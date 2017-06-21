@@ -13,8 +13,8 @@
 
     var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameContainer');
     game.state.add('boot', bootState);
-    // game.state.add('stage1', stage1State);
-    //game.state.add('town', townState);
+    game.state.add('stage1', stage1State);
+    // //game.state.add('town', townState);
     game.state.start('boot');
     
     // function preload() {
@@ -80,13 +80,14 @@
             inQuest = false;
         }
         if(Phaser.Rectangle.intersects(player.getBounds(), exitToTownSprite.getBounds())){
-            whoWeTalkingTo = "BigTree";
-            allowCollision = false;
-            setTimeout(preventDoubleCollision(), 500)
-            dialogArray = conversationJSON.Level1["BigTree"];
-            startConversation(dialogArray,bigTreeSprite,true);
-            addWeaponToInventory('Limb');
-            inQuest = false;
+            // whoWeTalkingTo = "BigTree";
+            // allowCollision = false;
+            // setTimeout(preventDoubleCollision(), 500)
+            // dialogArray = conversationJSON.Level1["BigTree"];
+            // startConversation(dialogArray,bigTreeSprite,true);
+            // addWeaponToInventory('Limb');
+            // inQuest = false;
+            game.state.start('town');
         }
     }
 
