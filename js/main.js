@@ -27,6 +27,8 @@
         game.load.image('terrain-atlas', 'assets/terrain_atlas.png')
         game.load.image('speech_part', 'assets/speech_part.png');
         game.load.image('pop', 'assets/pop.png');
+        game.load.image('townTiles1', 'assets/TownTiles1.png')
+        game.load.image('townTiles2', 'assets/townTiles2.png')
     }
     function create() {
         spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -38,6 +40,8 @@
         map.addTilesetImage('tree', 'tree');
         map.addTilesetImage('RED', 'red');
         map.addTilesetImage('terrain-atlas', 'terrain-atlas');
+        map.addTilesetImage('townTiles1', 'townTiles1');
+        map.addTilesetImage('townTiles', 'townTiles2');
 		addLayersPlayerCollisions();
         addNPC();
         addPlayerAnimations();
