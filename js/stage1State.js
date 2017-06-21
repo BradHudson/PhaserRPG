@@ -9,20 +9,20 @@ var stage1State = {
         map.addTilesetImage('tree', 'tree');
         map.addTilesetImage('RED', 'red');
         map.addTilesetImage('terrain-atlas', 'terrain-atlas');
-		this.addLayersPlayerCollisions();
+		stage1State.addLayersPlayerCollisions();
         addNPC();
         addPlayerAnimations();
         addTextOnScreen();
     },
     update: function(){
-    this.handleCollisions();
+    stage1State.handleCollisions();
     resetPlayerVelocity();
 	setKeys();
     },
     handleCollisions: function(){
         game.physics.arcade.collide(player, collisionlayer);
-        this.handleNPCCollision();
-        this.handleBigTreeCollision();
+        stage1State.handleNPCCollision();
+        stage1State.handleBigTreeCollision();
     },
     addLayersPlayerCollisions: function(){
         collisionlayer = map.createLayer('Collisions');
@@ -66,7 +66,7 @@ var stage1State = {
 		layer.wrap = true;  
     },
     handleBigTreeCollision: function() {
-        this.ensureBigTreeSize();
+        stage1State.ensureBigTreeSize();
         if(Phaser.Rectangle.intersects(player.getBounds(), bigTreeSprite.getBounds()) && actionKeyAndAllowCollision() && inQuest === true){
             whoWeTalkingTo = "BigTree";
             allowCollision = false;
@@ -81,7 +81,7 @@ var stage1State = {
         }
     },
     handleNPCCollision: function(){
-        game.physics.arcade.collide(player, npcGroup, function(player,n){ this.npcCollisionHandler(player,n) });
+        game.physics.arcade.collide(player, npcGroup, function(player,n){ stage1State.npcCollisionHandler(player,n) });
         if(Phaser.Rectangle.intersects(player.getBounds(), npcGroup.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
             allowCollision = false;// prevent double collision for half a second
             setTimeout(preventDoubleCollision(), 500)

@@ -1,6 +1,3 @@
-var playerProfile = new Player();
-var inQuest = false;
-
 function Player(){
     playerJSON = loadPlayerStats();
     this.skillLevel = playerJSON.SkillLevel;
