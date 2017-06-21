@@ -63,9 +63,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":62.6667,
-                 "x":969.333,
-                 "y":501.333
+                 "width":62.6666666666667,
+                 "x":969.333333333333,
+                 "y":501.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -78,15 +78,15 @@
          "name":"NPC",
          "objects":[
                 {
-                 "height":65.3333,
+                 "height":65.3333333333334,
                  "id":10,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":73.3333,
+                 "width":73.3333333333333,
                  "x":1256,
-                 "y":430.667
+                 "y":430.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -99,36 +99,15 @@
          "name":"BigTree",
          "objects":[
                 {
-                 "height":177.333,
+                 "height":177.333333333333,
                  "id":11,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":205.333,
-                 "x":769.333,
-                 "y":253.333
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "name":"ExitToTown",
-         "objects":[
-                {
-                 "height":60,
-                 "id":14,
-                 "name":"ExitToTown",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":96,
-                 "x":1249.33333333333,
-                 "y":5.33333333333333
+                 "width":205.333333333333,
+                 "x":769.333333333333,
+                 "y":253.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -136,16 +115,15 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":15,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.0.1",
  "tileheight":32,
  "tilesets":[
         {
          "firstgid":1,
          "columns":12,
-        "image":"..\/Localhost\/Games\/hellophaser\/assets\/grass-tiles-2-small.png",
+        "image":"assets\/grass-tiles-2-small.png",
         "imageheight":192,
         "imagewidth":384,
         "margin":0,
@@ -159,7 +137,7 @@
         {
          "firstgid":73,
          "columns":8,
-        "image":"..\/Localhost\/Games\/hellophaser\/assets\/tree-tile.png",
+        "image":"assets\/tree-tile.png",
         "imageheight":256,
         "imagewidth":256,
         "margin":0,
@@ -173,7 +151,7 @@
         {
          "firstgid":137,
          "columns":1,
-        "image":"..\/Localhost\/Games\/hellophaser\/assets\/RED.png",
+        "image":"assets\/RED.png",
         "imageheight":32,
         "imagewidth":32,
         "margin":0,
@@ -223,7 +201,7 @@
         {
          "firstgid":138,
          "columns":32,
-        "image":"..\/Localhost\/Games\/hellophaser\/assets\/terrain_atlas.png",
+        "image":"assets\/terrain_atlas.png",
         "imageheight":1024,
         "imagewidth":1024,
         "margin":0,
@@ -236,6 +214,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":1,
+ "version":"1.0.0",
  "width":50
 }
