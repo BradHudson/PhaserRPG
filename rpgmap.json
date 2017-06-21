@@ -75,6 +75,27 @@
         }, 
         {
          "draworder":"topdown",
+         "name":"ExitToTown",
+         "objects":[
+                {
+                 "height":59,
+                 "id":11,
+                 "name":"ExitToTown",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":91,
+                 "x":1250,
+                 "y":3
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "name":"NPC",
          "objects":[
                 {
@@ -123,7 +144,7 @@
         {
          "firstgid":1,
          "columns":12,
-        "image":"..\/Downloads\/tileset\/grass-tiles-2-small.png",
+        "image":"..\/Localhost\/Games\/hellophaser\/assets\/grass-tiles-2-small.png",
         "imageheight":192,
         "imagewidth":384,
         "margin":0,
@@ -151,7 +172,7 @@
         {
          "firstgid":137,
          "columns":1,
-        "image":"..\/Downloads\/RED.png",
+        "image":"..\/Localhost\/Games\/hellophaser\/assets\/RED.png",
         "imageheight":32,
         "imagewidth":32,
         "margin":0,

@@ -1,5 +1,5 @@
 { "columns":12,
- "image":"..\/Downloads\/tileset\/grass-tiles-2-small.png",
+ "image":"assets\/grass-tiles.png",
  "imageheight":192,
  "imagewidth":384,
  "margin":0,
