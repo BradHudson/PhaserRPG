@@ -21,10 +21,8 @@ var stage1State = {
     },
     handleCollisions: function(){
         game.physics.arcade.collide(player, collisionlayer);
-        if(game.state.current === 'stage1'){
-        handleNPCCollision();
-        handleBigTreeCollision();
-        }
+        this.handleNPCCollision();
+        this.handleBigTreeCollision();
     },
     addLayersPlayerCollisions: function(){
         collisionlayer = map.createLayer('Collisions');
@@ -66,6 +64,48 @@ var stage1State = {
         map.createLayer('Treetop');
 		layer.resizeWorld();
 		layer.wrap = true;  
+    },
+    handleBigTreeCollision: function() {
+        this.ensureBigTreeSize();
+        if(Phaser.Rectangle.intersects(player.getBounds(), bigTreeSprite.getBounds()) && actionKeyAndAllowCollision() && inQuest === true){
+            whoWeTalkingTo = "BigTree";
+            allowCollision = false;
+            setTimeout(preventDoubleCollision(), 500)
+            dialogArray = conversationJSON.Level1["BigTree"];
+            startConversation(dialogArray,bigTreeSprite,true);
+            addWeaponToInventory('Limb');
+            inQuest = false;
+        }
+        if(Phaser.Rectangle.intersects(player.getBounds(), exitToTownSprite.getBounds())){
+            game.state.start('town');
+        }
+    },
+    handleNPCCollision: function(){
+        game.physics.arcade.collide(player, npcGroup, function(player,n){ this.npcCollisionHandler(player,n) });
+        if(Phaser.Rectangle.intersects(player.getBounds(), npcGroup.getBounds()) && actionKeyAndAllowCollision() && inQuest === false){
+            allowCollision = false;// prevent double collision for half a second
+            setTimeout(preventDoubleCollision(), 500)
+            if(inConversation === false){
+                whoWeTalkingTo = npcJSONForCurrentStage[whoWeTalkingToID].Name;
+                dialogArray = conversationJSON.Level1[whoWeTalkingTo][stageOfNPCConversation];
+                inQuest = true;
+                startConversation(dialogArray, npcGroup.children[whoWeTalkingToID]);
+                if(stageOfNPCConversation === 1){
+                    setTimeout(function(){
+                        fight(whoWeTalkingToID,2,3,npcGroup.children[whoWeTalkingToID])}, 1500);  
+                }
+            }
+        }
+    },
+    npcCollisionHandler: function(player,n) {
+        whoWeTalkingToID = npcGroup.children.indexOf(n);
+        setVelocityZero(n);
+    },
+    ensureBigTreeSize: function() {
+        if(bigTreeSprite.width <= 100 || bigTreeSprite.height <= 100){
+            bigTreeSprite.width = 224;
+            bigTreeSprite.height = 224;
+        }
     }
 
 }
