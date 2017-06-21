@@ -14,7 +14,7 @@
     var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameContainer');
     game.state.add('boot', bootState);
     game.state.add('stage1', stage1State);
-    // //game.state.add('town', townState);
+    game.state.add('town', townState);
     game.state.start('boot');
     
     // function preload() {
@@ -34,8 +34,8 @@
     //     game.load.image('terrain-atlas', 'assets/terrain_atlas.png')
     //     game.load.image('speech_part', 'assets/speech_part.png');
     //     game.load.image('pop', 'assets/pop.png');
-    //     game.load.image('townTiles1', 'assets/TownTiles1.png')
-    //     game.load.image('townTiles2', 'assets/townTiles2.png')
+        // game.load.image('townTiles1', 'assets/TownTiles1.png')
+        // game.load.image('townTiles2', 'assets/townTiles2.png')
     // }
     // function create() {
     //     spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -64,8 +64,10 @@
     function handleCollisions(){
         //Collision between player and collision layer
         game.physics.arcade.collide(player, collisionlayer);
+        if(game.state.current === 'stage1'){
         handleNPCCollision();
         handleBigTreeCollision();
+        }
     }
 
     function handleBigTreeCollision() {
@@ -117,12 +119,16 @@
     function addLayersPlayerCollisions(){
         //COLLISIONS LAYER MOST IMPORTANT
         collisionlayer = map.createLayer('Collisions');
-		map.setCollision(137, true, 'Collisions');
+		// map.setCollision(137, true, 'Collisions');
 
 		//BASE LAYER
         layer = map.createLayer('Background');
 		
         //INVISIBLE WALL BIG TREE
+        if(game.state.current === 'stage1'){
+            map.setCollision(137, true, 'Collisions');
+
+        
         bigTreeSprite = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50);
         bigTreeSprite.scale.setTo(7, 7);
         bigTreeSprite.position.x = map.objects.BigTree[0].x + 20;
@@ -148,7 +154,14 @@
         player.position.x = map.objects.StartPosition[0].x;
         player.position.y = map.objects.StartPosition[0].y;
         //equipWeapon(player, 'Axe'); //wanna see him hold the axe? click to swing
+    }else{
+        map.setCollision(329, true, 'Collisions');
+        player = game.add.sprite(800, 400, 'dude');
+        game.physics.enable(player, Phaser.Physics.ARCADE);
+        player.body.collideWorldBounds = true;
+		player.bringToTop();
 
+        }
 		// add other layers
 		map.createLayer('Foreground');
         map.createLayer('Treetop');
