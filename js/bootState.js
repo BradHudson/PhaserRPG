@@ -20,6 +20,6 @@ var bootState = {
         game.load.image('townTiles2', 'assets/townTiles2.png')
     },
     create: function() {
-        game.state.start('stage1');
+        game.state.start('woods');
     }
 }

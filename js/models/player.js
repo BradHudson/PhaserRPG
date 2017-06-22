@@ -7,6 +7,7 @@ function Player(){
     this.playerInventory = playerJSON.Inventory;
     this.equippedWeapon = playerJSON.EquippedWeapon;
     this.equippedItem = playerJSON.EquippedItem;
+    this.ComingFromLocation = '';
 }
 
 function savePlayer(){

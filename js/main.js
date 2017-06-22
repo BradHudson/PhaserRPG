@@ -14,7 +14,7 @@ var inQuest = false;
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameContainer');
 game.state.add('boot', bootState);
-game.state.add('stage1', stage1State);
+game.state.add('woods', stage1State);
 game.state.add('town', townState);
 game.state.start('boot');
 

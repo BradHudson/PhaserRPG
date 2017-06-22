@@ -23,6 +23,10 @@ var townState = {
 
     handleCollisions: function() {
         game.physics.arcade.collide(player, collisionlayer);
+        if(Phaser.Rectangle.intersects(player.getBounds(), exitToWoodsSprite.getBounds())){
+            playerProfile.ComingFromLocation = 'town';
+            game.state.start('woods');
+        }
     },
     addLayersPlayerCollisions: function(){
         collisionlayer = map.createLayer('Collisions');
@@ -31,10 +35,21 @@ var townState = {
 		//BASE LAYER
         layer = map.createLayer('Background');
         
+        exitToWoodsSprite = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50);
+        exitToWoodsSprite.scale.setTo(5, 1);
+        exitToWoodsSprite.position.x = map.objects.ExitToWoods[0].x;
+        exitToWoodsSprite.position.y = map.objects.ExitToWoods[0].y;
+        game.physics.enable(exitToWoodsSprite, Phaser.Physics.ARCADE);
+        exitToWoodsSprite.body.immovable = true;
+        exitToWoodsSprite.body.collideWorldBounds = true;
+
+
         player = game.add.sprite(800, 400, 'dude');
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.body.collideWorldBounds = true;
 		player.bringToTop();
+        player.position.x = map.objects.PlayerStart[0].x;
+        player.position.y = map.objects.PlayerStart[0].y;
 
         // add other layers
 		map.createLayer('Foreground');

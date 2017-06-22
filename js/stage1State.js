@@ -43,7 +43,7 @@ var stage1State = {
 
         //INVISIBLE WALL EXIT TO TOWN
         exitToTownSprite = game.add.sprite(game.world.centerX - 50, game.world.centerY - 50);
-        exitToTownSprite.scale.setTo(4, 4);
+        exitToTownSprite.scale.setTo(5, 1);
         exitToTownSprite.position.x = map.objects.ExitToTown[0].x;
         exitToTownSprite.position.y = map.objects.ExitToTown[0].y;
         game.physics.enable(exitToTownSprite, Phaser.Physics.ARCADE);
@@ -77,6 +77,7 @@ var stage1State = {
             inQuest = false;
         }
         if(Phaser.Rectangle.intersects(player.getBounds(), exitToTownSprite.getBounds())){
+            playerProfile.ComingFromLocation = 'woods';
             game.state.start('town');
         }
     },
