@@ -211,9 +211,9 @@ function move2Click() {
 
 function playerAttack(moveDetails){
     damageDone = determineDamage.bind(moveDetails)();
+    normalEnemyTint = currentEnemySprite.tint;
     if(damageDone > 0){
     player.position.x = npc.position.x - 25
-    normalEnemyTint = currentEnemySprite.tint;
     currentEnemySprite.tint = "0xff0000";
     npcProfile.enemyHealth = npcProfile.enemyHealth - damageDone;
     enemyHP.text = "HP:" + npcProfile.enemyHealth;
