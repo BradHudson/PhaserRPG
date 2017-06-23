@@ -199,8 +199,10 @@ function renderFightButtons(){
     move1.width = 300;
     move2 = game.add.button(player.position.x, player.position.y + 100, '', move2Click);
     move2.width = 300;
-    textMove1 = game.add.text(player.position.x, player.position.y + 50, "Strike",  { font: "24px Arial", fill: '#ffffff', backgroundColor: 'rgb(38, 12, 12)' });
-    textMove2 = game.add.text(player.position.x, player.position.y + 100, "Powerful Strike",  { font: "24px Arial", fill: '#ffffff', backgroundColor: 'rgb(38, 12, 12)' });
+    textMove1 = game.add.text(player.position.x, player.position.y + 50, getWeaponMoves(playerProfile.equippedWeapon)[0].Name,  { font: "24px Arial", fill: '#ffffff', backgroundColor: 'rgb(38, 12, 12)' });
+    textMove2 = game.add.text(player.position.x, player.position.y + 100, getWeaponMoves(playerProfile.equippedWeapon)[1].Name,  { font: "24px Arial", fill: '#ffffff', backgroundColor: 'rgb(38, 12, 12)' });
+    playerHP = game.add.text(player.position.x, player.position.y - 30, "HP: 100",  { font: "24px Arial", fill: '#ffffff' });
+    playerHP = game.add.text(currentEnemySprite.position.x, currentEnemySprite.position.y - 30, "HP: 100",  { font: "24px Arial", fill: '#ffffff' });
 }
 
 function move1Click() {
@@ -220,11 +222,14 @@ function playerAttack(){
     playerWeapon.anchor.setTo(.5, .5);
     normalEnemyTint = currentEnemySprite.tint;
     currentEnemySprite.tint = "0xff0000";
-	// playerWeapon.animations.play('swing-right');
     setTimeout(enemyTurn, 1000);
 }
 
 function enemyTurn() {
     currentEnemySprite.tint = normalEnemyTint;
     player.position.x = battleCenter.position.x - 100;
+}
+
+function performMoveText(){
+    textOnScreen.text = (whosTurn + " performs " + moveDetails.Name);;
 }

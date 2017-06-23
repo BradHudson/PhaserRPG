@@ -63,6 +63,7 @@ function chooseWeaponFromSheet(type){
 }
 
 function equipWeapon(sprite, weaponType){
+    playerProfile.equippedWeapon = weaponType;
     weaponReference = chooseWeaponFromSheet(weaponType);
     if(weaponType === 'Limb') {
         playerWeapon = new Phaser.Sprite(this.game, 10, 10, "limb", weaponReference.SpriteSheetFrames.Start);
@@ -71,7 +72,7 @@ function equipWeapon(sprite, weaponType){
         playerWeapon = new Phaser.Sprite(this.game, 10, 10, "weapons", weaponReference.SpriteSheetFrames.Start);
     }
     addWeaponAnimations(playerWeapon);
-    sprite.addChild(playerWeapon);
+    sprite.addChild(playerWeapon); 
     playerWeapon.animations.play('down');
 	playerWeapon.anchor.setTo(.7, .3);
 }
