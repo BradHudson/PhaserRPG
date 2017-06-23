@@ -14,21 +14,22 @@ var playerMove1;
 var playerMove2;
 var enemyMove1;
 var enemyMove2;
+var playerHP;
+var enemyHP;
 var whosTurn = 'Player';
 var playerWon;
 var battleCenter;
 var currentEnemySprite;
 var normalEnemyTint;
+var normalPlayerTint;
 
 function fight(enemy,winningIndex,losingIndex,sprite){
     npcProfile = new Enemy(currentStage, enemy,sprite);
     currentEnemy = npcProfile.name;
     winningConvoIndex = winningIndex;
     losingConvoIndex = losingIndex;
-    resetPlayerVelocity();
-    inBattle = true;
     window.setInterval(flash,200);
-    setTimeout( setupFightWindow, 1000 );
+    setTimeout( stopFlashing, 1000 );
 }
 
 function setupFightWindow(){
@@ -88,40 +89,30 @@ function attemptMove(item,moveIndex){
 function determineDamage(){
     highestSuccessValue = Math.floor(Math.random() * 100) + 1;
     if(highestSuccessValue > moveDetails.Chance){
-        updateFightCommentary(whosTurn + " attempts " + moveDetails.Name + " and Misses!");
+        textOnScreen.text =  whosTurn + " attempts " + moveDetails.Name + " and Misses!";
         return 0;
     } else {
-        updateFightCommentary(whosTurn + " attempts " + moveDetails.Name + " and Lands Dealing " + moveDetails.Damage +  " Damage!");
+        textOnScreen.text = whosTurn + " attempts " + moveDetails.Name + " and Lands Dealing " + moveDetails.Damage +  " Damage!";
         return moveDetails.Damage;
     }
 }
 
 function updateNPCStats(damage){
     setTimeout(function(){
-        npcProfile.enemyHealth = npcProfile.enemyHealth - damage;
-        if(npcProfile.enemyHealth < 1){
-            updateFightCommentary("The enemy has been Killed!");
-            playerWon = true;
-            setTimeout(endOfFight,1000);
-        }else{
-            updateFightCommentary("The enemy has " + npcProfile.enemyHealth + " Health Remaining.");
-            whosTurn = 'Enemy';
-            setTimeout(function(){
-                attemptMove(npcProfile.enemyWeapon,Math.floor(Math.random() * 2))
-            }, 1000);
-        }
+        
      },1000)
 }
 
 function updatePlayerStats(damage){
     setTimeout(function(){
     playerProfile.playerHealth = playerProfile.playerHealth - damage;
+    playerHP.text = "HP:" + playerProfile.playerHealth;
     if(playerProfile.playerHealth < 1){
-        updateFightCommentary("Player has been Killed!");
+        textOnScreen.text = "Player has been Killed!";
         playerWon = false;
-        setTimeout(endOfFight,1000);
+        setTimeout(finishBattle,1000);
     }else{
-        updateFightCommentary("Player has " + playerProfile.playerHealth + " Remaining. You're Turn Hero!");
+        textOnScreen.text = "Player has " + playerProfile.playerHealth + " Remaining. You're Turn Hero!";
         whosTurn = 'Player';
     }}, 1000);
 }
@@ -148,26 +139,10 @@ function loadWeaponStats(){
         flashStep=2; 
         }
         else {
-        document.getElementById('flashScreen').style.backgroundColor="WHITE";
+        document.getElementById('flashScreen').style.backgroundColor="RED";
         flashStep=1;
         }
     }
-}
-
-function updateFightCommentary(text){
-    document.getElementById('fight-commentary').innerHTML = text;
-}
-
-function endOfFight(){
-    document.getElementsByClassName('modal')[0].style.display = 'none';
-    if(playerWon === true){
-        dialogArray = conversationJSON.Level1[currentEnemy][winningConvoIndex];
-        startConversation(dialogArray, npcProfile.object);
-    }else{
-        dialogArray = conversationJSON.Level1[currentEnemy][losingConvoIndex];
-        startConversation(dialogArray, npcProfile.object);
-    }
-    inBattle = false;
 }
 
 function positionPlayers(enemy) {
@@ -189,6 +164,19 @@ function positionPlayers(enemy) {
 }
 
 function finishBattle(){
+    move1.destroy();
+    move2.destroy();
+    textMove1.destroy();
+    textMove2.destroy();
+    playerHP.destroy();
+    enemyHP.destroy();
+    if(playerWon === true){
+        dialogArray = conversationJSON.Level1[currentEnemy][winningConvoIndex];
+        startConversation(dialogArray, npcProfile.object);
+    }else{
+        dialogArray = conversationJSON.Level1[currentEnemy][losingConvoIndex];
+        startConversation(dialogArray, npcProfile.object);
+    }
     inBattle = false;
     game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
     battleCenter.destroy();
@@ -201,35 +189,83 @@ function renderFightButtons(){
     move2.width = 300;
     textMove1 = game.add.text(player.position.x, player.position.y + 50, getWeaponMoves(playerProfile.equippedWeapon)[0].Name,  { font: "24px Arial", fill: '#ffffff', backgroundColor: 'rgb(38, 12, 12)' });
     textMove2 = game.add.text(player.position.x, player.position.y + 100, getWeaponMoves(playerProfile.equippedWeapon)[1].Name,  { font: "24px Arial", fill: '#ffffff', backgroundColor: 'rgb(38, 12, 12)' });
-    playerHP = game.add.text(player.position.x, player.position.y - 30, "HP: 100",  { font: "24px Arial", fill: '#ffffff' });
-    playerHP = game.add.text(currentEnemySprite.position.x, currentEnemySprite.position.y - 30, "HP: 100",  { font: "24px Arial", fill: '#ffffff' });
+    playerHP = game.add.text(player.position.x, player.position.y - 30, "HP:" + playerProfile.playerHealth,  { font: "24px Arial", fill: '#ffffff' });
+    enemyHP = game.add.text(currentEnemySprite.position.x, currentEnemySprite.position.y - 30, "HP:" + npcProfile.enemyHealth,  { font: "24px Arial", fill: '#ffffff' });
 }
 
 function move1Click() {
     if(whosTurn = 'Player'){
-    playerAttack()
+    moveDetails = weaponsProfile[playerProfile.equippedWeapon].Moves[0];
+    performMoveText(moveDetails.Name)
+    setTimeout(function(){playerAttack(moveDetails)},1000)
     }
 }
 
 function move2Click() {
     if(whosTurn = 'Player'){
-    playerAttack()
+    moveDetails = weaponsProfile[playerProfile.equippedWeapon].Moves[1];
+    performMoveText(moveDetails.Name)
+    setTimeout(function(){playerAttack(moveDetails)},1000)
     }
 }
 
-function playerAttack(){
+function playerAttack(moveDetails){
+    damageDone = determineDamage.bind(moveDetails)();
+    if(damageDone > 0){
     player.position.x = npc.position.x - 25
-    playerWeapon.anchor.setTo(.5, .5);
     normalEnemyTint = currentEnemySprite.tint;
     currentEnemySprite.tint = "0xff0000";
-    setTimeout(enemyTurn, 1000);
-}
-
-function enemyTurn() {
+    npcProfile.enemyHealth = npcProfile.enemyHealth - damageDone;
+    enemyHP.text = "HP:" + npcProfile.enemyHealth;
+    }
+    if(npcProfile.enemyHealth < 1){
+        textOnScreen.text = "The enemy has been Killed!";
+        playerWon = true;
+        setTimeout(finishBattle,1000);
+    }else{
+        textOnScreen.text = "The enemy has " + npcProfile.enemyHealth + " Health Remaining.";
+        whosTurn = 'Enemy';
+        setTimeout(enemyAttack, 2000);
+    }
+    setTimeout(function() {
     currentEnemySprite.tint = normalEnemyTint;
     player.position.x = battleCenter.position.x - 100;
+    }, 1000)
 }
 
-function performMoveText(){
-    textOnScreen.text = (whosTurn + " performs " + moveDetails.Name);;
+function enemyAttack() {
+    moveDetails = weaponsProfile[npcProfile.enemyWeapon].Moves[Math.floor(Math.random() * 2)]
+    damageDone = determineDamage.bind(moveDetails)();
+    normalPlayerTint = player.tint;
+    if(damageDone > 0){
+    npcProfile.object.position.x = player.position.x + 25;
+    player.tint = "0xff0000";
+
+    playerProfile.playerHealth = playerProfile.playerHealth - damageDone;
+    playerHP.text = "HP:" + playerProfile.playerHealth;
+}
+    setTimeout(function(){
+    if(playerProfile.playerHealth < 1){
+        textOnScreen.text = "Player has been Killed!";
+        playerWon = false;
+        setTimeout(finishBattle,1000);
+    }else{
+        textOnScreen.text = "Player has " + playerProfile.playerHealth + " Remaining. You're Turn Hero!";
+    }
+    setTimeout(function() {
+    player.tint = normalPlayerTint;
+    npcProfile.object.position.x = battleCenter.position.x + 100;
+    }, 1000)
+    whosTurn = "Player"},1000)
+}
+
+function performMoveText(moveName){
+    textOnScreen.text = (whosTurn + " performs " + moveName);;
+}
+
+function stopFlashing(){
+    positionPlayers(npcProfile.object)
+    document.getElementById('flashScreen').style.display = 'none';
+    document.getElementById('flashScreen').style.backgroundColor="";
+    keepFlashing = false;
 }
