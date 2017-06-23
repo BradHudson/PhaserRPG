@@ -1,6 +1,3 @@
-var playerProfile = new Player();
-var inQuest = false;
-
 function Player(){
     playerJSON = loadPlayerStats();
     this.skillLevel = playerJSON.SkillLevel;
@@ -10,6 +7,7 @@ function Player(){
     this.playerInventory = playerJSON.Inventory;
     this.equippedWeapon = playerJSON.EquippedWeapon;
     this.equippedItem = playerJSON.EquippedItem;
+    this.ComingFromLocation = '';
 }
 
 function savePlayer(){

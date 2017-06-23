@@ -39,12 +39,12 @@
     "Defense": 1,
     "Moves": [
         {
-            "Name": "Strike",
+            "Name": "Chop",
             "Chance": 90,
             "Damage": 10
         },
         {
-            "Name": "Powerful Strike",
+            "Name": "Timberrrr",
             "Chance": 25,
             "Damage": 25
         }

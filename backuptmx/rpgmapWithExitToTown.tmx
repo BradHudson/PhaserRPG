@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="12">
- <tileset firstgid="1" source="../grassrpg.json"/>
- <tileset firstgid="73" source="../treerpg.json"/>
- <tileset firstgid="137" source="../RED.json"/>
- <tileset firstgid="138" source="../terrain-atlas.json"/>
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="15">
+ <tileset firstgid="1" source="../../../../Desktop/grassrpg.json"/>
+ <tileset firstgid="73" source="../../../../Desktop/treerpg.json"/>
+ <tileset firstgid="137" source="../../../../Desktop/RED.json"/>
+ <tileset firstgid="138" source="../../../../Desktop/terrain-atlas.json"/>
  <layer name="Background" width="50" height="50">
   <data encoding="csv">
 1,2,3,4,5,6,7,8,9,10,1,2,7,7,7,7,7,1,2,3,3,3,3,3,3,1,1,1,1,1,2,3,4,4,5,6,7,8,9,818,819,820,3,4,5,6,7,8,9,10,
@@ -166,7 +166,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="Collisions" width="50" height="50">
+ <layer name="Collisions" width="50" height="50" visible="0">
   <properties>
    <property name="Collidable" value="True"/>
   </properties>
@@ -226,10 +226,13 @@
  <objectgroup name="StartPosition">
   <object id="9" x="969.333" y="501.333" width="62.6667" height="60"/>
  </objectgroup>
- <objectgroup name="ExitToTown">
-  <object id="11" name="ExitToTown" x="1250" y="3" width="91" height="59"/>
- </objectgroup>
  <objectgroup name="NPC">
   <object id="10" x="1256" y="430.667" width="73.3333" height="65.3333"/>
+ </objectgroup>
+ <objectgroup name="BigTree">
+  <object id="11" x="769.333" y="253.333" width="205.333" height="177.333"/>
+ </objectgroup>
+ <objectgroup name="ExitToTown">
+  <object id="14" name="ExitToTown" x="1249.33" y="5.33333" width="96" height="60"/>
  </objectgroup>
 </map>

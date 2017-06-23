@@ -1,5 +1,5 @@
 { "columns":1,
- "image":"..\/Downloads\/RED.png",
+ "image":"assets\/RED.png",
  "imageheight":32,
  "imagewidth":32,
  "margin":0,
@@ -28,14 +28,6 @@
                      "y":2
                     }],
              "opacity":1,
-             "properties":
-                {
-                 "Collidable":"True"
-                },
-             "propertytypes":
-                {
-                 "Collidable":"string"
-                },
              "type":"objectgroup",
              "visible":true,
              "x":0,

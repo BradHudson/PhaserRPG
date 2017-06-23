@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="14">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="15">
  <tileset firstgid="1" source="../../../Desktop/grassrpg.json"/>
  <tileset firstgid="73" source="../../../Desktop/treerpg.json"/>
  <tileset firstgid="137" source="../../../Desktop/RED.json"/>
@@ -231,5 +231,8 @@
  </objectgroup>
  <objectgroup name="BigTree">
   <object id="11" x="769.333" y="253.333" width="205.333" height="177.333"/>
+ </objectgroup>
+ <objectgroup name="ExitToTown">
+  <object id="14" name="ExitToTown" x="1249.33" y="5.33333" width="96" height="60"/>
  </objectgroup>
 </map>

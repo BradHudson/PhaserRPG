@@ -63,9 +63,31 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":62.6666666666667,
-                 "x":969.333333333333,
-                 "y":501.333333333333
+                 "width":62.6667,
+                 "x":969.333,
+                 "y":501.333
+                }, 
+                {
+                 "height":74,
+                 "id":15,
+                 "name":"StartFromTown",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":92,
+                 "x":1250,
+                 "y":97
+                }, 
+                {
+                 "height":65,
+                 "id":16,
+                 "name":"StartFromWorld",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":68,
+                 "x":128,
+                 "y":518
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -78,15 +100,15 @@
          "name":"NPC",
          "objects":[
                 {
-                 "height":65.3333333333334,
+                 "height":65.3333,
                  "id":10,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":73.3333333333333,
+                 "width":73.3333,
                  "x":1256,
-                 "y":430.666666666667
+                 "y":430.667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -99,15 +121,111 @@
          "name":"BigTree",
          "objects":[
                 {
-                 "height":177.333333333333,
+                 "height":177.333,
                  "id":11,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":205.333333333333,
-                 "x":769.333333333333,
-                 "y":253.333333333333
+                 "width":205.333,
+                 "x":769.333,
+                 "y":253.333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"ExitToTown",
+         "objects":[
+                {
+                 "height":60,
+                 "id":14,
+                 "name":"ExitToTown",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96,
+                 "x":1249.33333333333,
+                 "y":5.33333333333333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"Monsters",
+         "objects":[
+                {
+                 "height":67,
+                 "id":18,
+                 "name":"Monster1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":79,
+                 "x":506,
+                 "y":503
+                }, 
+                {
+                 "height":85,
+                 "id":22,
+                 "name":"Monster2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":111,
+                 "x":198,
+                 "y":763
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"Animals",
+         "objects":[
+                {
+                 "height":61,
+                 "id":19,
+                 "name":"Animals1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":84,
+                 "x":690,
+                 "y":505
+                }, 
+                {
+                 "height":89,
+                 "id":20,
+                 "name":"Animals2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":106,
+                 "x":1149,
+                 "y":860
+                }, 
+                {
+                 "height":84,
+                 "id":21,
+                 "name":"Animals3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":108,
+                 "x":248,
+                 "y":142
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -115,105 +233,94 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":14,
+ "nextobjectid":23,
  "orientation":"orthogonal",
  "renderorder":"right-down",
+ "tiledversion":"1.0.1",
  "tileheight":32,
  "tilesets":[
         {
-         "firstgid":1,
          "columns":12,
-        "image":"..\/Downloads\/tileset\/grass-tiles-2-small.png",
-        "imageheight":192,
-        "imagewidth":384,
-        "margin":0,
-        "name":"grass",
-        "spacing":0,
-        "tilecount":72,
-        "tileheight":32,
-        "tilewidth":32,
-        "type":"tileset"
+         "firstgid":1,
+         "image":"assets\/grass-tiles.png",
+         "imageheight":192,
+         "imagewidth":384,
+         "margin":0,
+         "name":"grass",
+         "spacing":0,
+         "tilecount":72,
+         "tileheight":32,
+         "tilewidth":32
         }, 
         {
-         "firstgid":73,
          "columns":8,
-        "image":"..\/Localhost\/Games\/hellophaser\/assets\/tree-tile.png",
-        "imageheight":256,
-        "imagewidth":256,
-        "margin":0,
-        "name":"tree",
-        "spacing":0,
-        "tilecount":64,
-        "tileheight":32,
-        "tilewidth":32,
-        "type":"tileset"
+         "firstgid":73,
+         "image":"assets\/tree-tile.png",
+         "imageheight":256,
+         "imagewidth":256,
+         "margin":0,
+         "name":"tree",
+         "spacing":0,
+         "tilecount":64,
+         "tileheight":32,
+         "tilewidth":32
         }, 
         {
-         "firstgid":137,
          "columns":1,
-        "image":"..\/Downloads\/RED.png",
-        "imageheight":32,
-        "imagewidth":32,
-        "margin":0,
-        "name":"RED",
-        "spacing":0,
-        "tilecount":1,
-        "tileheight":32,
-        "tiles":
+         "firstgid":137,
+         "image":"assets\/RED.png",
+         "imageheight":32,
+         "imagewidth":32,
+         "margin":0,
+         "name":"RED",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":32,
+         "tiles":
             {
-            "0":
+             "0":
                 {
-                "objectgroup":
+                 "objectgroup":
                     {
-                    "draworder":"index",
-                    "name":"",
-                    "objects":[
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
                             {
-                            "height":28,
-                            "id":1,
-                            "name":"",
-                            "rotation":0,
-                            "type":"",
-                            "visible":true,
-                            "width":33,
-                            "x":-1,
-                            "y":2
+                             "height":28,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":33,
+                             "x":-1,
+                             "y":2
                             }],
-                    "opacity":1,
-                    "properties":
-                        {
-                        "Collidable":"True"
-                        },
-                    "propertytypes":
-                        {
-                        "Collidable":"string"
-                        },
-                    "type":"objectgroup",
-                    "visible":true,
-                    "x":0,
-                    "y":0
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
                     }
                 }
             },
-        "tilewidth":32,
-        "type":"tileset"
+         "tilewidth":32
         }, 
         {
-         "firstgid":138,
          "columns":32,
-        "image":"..\/Localhost\/Games\/hellophaser\/assets\/terrain_atlas.png",
-        "imageheight":1024,
-        "imagewidth":1024,
-        "margin":0,
-        "name":"terrain-atlas",
-        "spacing":0,
-        "tilecount":1024,
-        "tileheight":32,
-        "tilewidth":32,
-        "type":"tileset"
+         "firstgid":138,
+         "image":"assets\/terrain_atlas.png",
+         "imageheight":1024,
+         "imagewidth":1024,
+         "margin":0,
+         "name":"terrain-atlas",
+         "spacing":0,
+         "tilecount":1024,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.0.0",
+ "version":1,
  "width":50
 }
