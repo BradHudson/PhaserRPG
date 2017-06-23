@@ -95,6 +95,7 @@ function addPlayerAnimations() {
 //npc.body.moveTo(3000, 100, 90); down
 
 function makeWander(npcInfo, moveUp = true, goHome = false){
+	if(inBattle === false){
 	var object = npcInfo.object;
 	if(inConversation === true){
 		setTimeout(function(){ return makeWander(npcInfo, moveUp) }, 1000);
@@ -112,15 +113,16 @@ function makeWander(npcInfo, moveUp = true, goHome = false){
 			return makeWander(npcInfo, !moveUp, true);
 		}, 2000);
 	} else{ //return to start position
-		if(moveUp === true){
-			npc.loadTexture('adam-back');
-		}else{npc.loadTexture('adam');}
-		game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1]);
-		setTimeout(function(){
-			setVelocityZero(object);
-			return makeWander(npcInfo, moveUp);
-		}, 2000);
-	}
+			if(moveUp === true){
+				npc.loadTexture('adam-back');
+			}else{npc.loadTexture('adam');}
+			game.physics.arcade.moveToXY(object, npcInfo.startXY[0], npcInfo.startXY[1]);
+			setTimeout(function(){
+				setVelocityZero(object);
+				return makeWander(npcInfo, moveUp);
+				}, 2000);
+			}
+		}
 	}
 }
 

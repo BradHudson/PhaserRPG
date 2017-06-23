@@ -16,6 +16,7 @@ var enemyMove1;
 var enemyMove2;
 var whosTurn = 'Player';
 var playerWon;
+var battleCenter;
 
 function fight(enemy,winningIndex,losingIndex,sprite){
     npcProfile = new Enemy(currentStage, enemy,sprite);
@@ -165,4 +166,17 @@ function endOfFight(){
         startConversation(dialogArray, npcProfile.object);
     }
     inBattle = false;
+}
+
+function positionPlayers(enemy) {
+    var x = (player.position.x + enemy.position.x)/2;
+    var y = (player.position.y + enemy.position.y)/2;
+    battleCenter = game.add.sprite(x,y);
+    game.camera.follow(battleCenter, Phaser.Camera.FOLLOW_TOPDOWN);
+    player.animations.play('right');
+    nenemypc.loadTexture('adam');
+}
+
+function deleteBattleCenter(){
+    battleCenter.destroy();
 }
