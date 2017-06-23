@@ -144,7 +144,7 @@ function weaponAnimations(){
 }
 
 function performAnimation() {
-	if(playerWeapon != undefined){
+	if(playerWeapon != undefined && inBattle === false){
 	if(game.input.activePointer.leftButton.isDown && direction === 'right'){
 		playerWeapon.anchor.setTo(.5, .5);
 		playerWeapon.animations.play('swing-right');

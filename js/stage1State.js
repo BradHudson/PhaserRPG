@@ -57,7 +57,7 @@ var stage1State = {
 		player.bringToTop();
         player.position.x = map.objects.StartPosition[0].x;
         player.position.y = map.objects.StartPosition[0].y;
-        //equipWeapon(player, 'Axe'); //wanna see him hold the axe? click to swing
+        equipWeapon(player, 'Axe'); //wanna see him hold the axe? click to swing
 
         // add other layers
 		map.createLayer('Foreground');

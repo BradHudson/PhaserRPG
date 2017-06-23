@@ -17,6 +17,8 @@ var enemyMove2;
 var whosTurn = 'Player';
 var playerWon;
 var battleCenter;
+var currentEnemySprite;
+var normalEnemyTint;
 
 function fight(enemy,winningIndex,losingIndex,sprite){
     npcProfile = new Enemy(currentStage, enemy,sprite);
@@ -169,14 +171,60 @@ function endOfFight(){
 }
 
 function positionPlayers(enemy) {
+    resetPlayerVelocity();
+    currentEnemySprite = enemy;
+    inBattle = true;
+    enemy.body.velocity = 0;
     var x = (player.position.x + enemy.position.x)/2;
     var y = (player.position.y + enemy.position.y)/2;
     battleCenter = game.add.sprite(x,y);
     game.camera.follow(battleCenter, Phaser.Camera.FOLLOW_TOPDOWN);
-    player.animations.play('right');
-    nenemypc.loadTexture('adam');
+    player.frame = 6;
+    enemy.loadTexture('adam');
+    player.position.x = battleCenter.position.x - 100;
+    player.position.y = battleCenter.position.y;
+    enemy.position.x = battleCenter.position.x + 100;
+    enemy.position.y = battleCenter.position.y;
+    renderFightButtons();
 }
 
-function deleteBattleCenter(){
+function finishBattle(){
+    inBattle = false;
+    game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
     battleCenter.destroy();
+}
+
+function renderFightButtons(){
+    move1 = game.add.button(player.position.x, player.position.y + 50, '', move1Click);
+    move1.width = 300;
+    move2 = game.add.button(player.position.x, player.position.y + 100, '', move2Click);
+    move2.width = 300;
+    textMove1 = game.add.text(player.position.x, player.position.y + 50, "Strike",  { font: "24px Arial", fill: '#ffffff', backgroundColor: 'rgb(38, 12, 12)' });
+    textMove2 = game.add.text(player.position.x, player.position.y + 100, "Powerful Strike",  { font: "24px Arial", fill: '#ffffff', backgroundColor: 'rgb(38, 12, 12)' });
+}
+
+function move1Click() {
+    if(whosTurn = 'Player'){
+    playerAttack()
+    }
+}
+
+function move2Click() {
+    if(whosTurn = 'Player'){
+    playerAttack()
+    }
+}
+
+function playerAttack(){
+    player.position.x = npc.position.x - 25
+    playerWeapon.anchor.setTo(.5, .5);
+    normalEnemyTint = currentEnemySprite.tint;
+    currentEnemySprite.tint = "0xff0000";
+	// playerWeapon.animations.play('swing-right');
+    setTimeout(enemyTurn, 1000);
+}
+
+function enemyTurn() {
+    currentEnemySprite.tint = normalEnemyTint;
+    player.position.x = battleCenter.position.x - 100;
 }
